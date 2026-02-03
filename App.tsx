@@ -189,7 +189,7 @@ export default function App() {
                  </div>
                  <div className="relative">
                    <div className="w-full aspect-square bg-slate-100 rounded-[4rem] overflow-hidden rotate-3">
-                     <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200" className="w-full h-full object-cover" />
+                     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200" className="w-full h-full object-cover" />
                    </div>
                    <div className="absolute -bottom-10 -left-10 p-8 bg-white shadow-2xl rounded-[2.5rem] border border-slate-100 animate-float">
                       <p className="text-cyan-600 font-black text-4xl leading-none">٩٨٪</p>

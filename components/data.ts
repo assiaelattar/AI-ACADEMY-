@@ -90,12 +90,12 @@ export const initialCourses: Course[] = [
     id: "7-day-build-camp",
     title: "مخيم بناء الذكاء الاصطناعي (7 أيام)",
     subtitle: "من الفكرة إلى منتج SaaS جاهز",
-    image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=1200&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop", // AI App/SaaS Visual
     tags: ["مكثف", "مؤسسون", "SaaS"],
     description: "انتقل من مجرد فكرة إلى نموذج أولي وظيفي لخدمة برمجية مدعومة بالذكاء الاصطناعي في أسبوع واحد فقط. تعلم هندسة الذكاء الاصطناعي وتكامل التطبيقات.",
     rating: "5.0",
     duration: "7 أيام",
-    ageGroup: "+16 / الكبار",
+    ageGroup: "للكبار والشغوفين",
     price: "4900",
     schedule: "يومياً 9:00 ص - 6:00 م",
     features: [
@@ -120,32 +120,32 @@ export const initialCourses: Course[] = [
     ]
   },
   {
-    id: "young-innovators",
-    title: "المبتكرون الصغار في الذكاء الاصطناعي",
+    id: "innovators-path",
+    title: "مسار المبتكرين في الذكاء الاصطناعي",
     subtitle: "برمج، ابدع، تحكم",
-    image: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=1200&auto=format&fit=crop",
-    tags: ["أطفال", "برمجة", "إبداع"],
-    description: "مسار مصمم خصيصاً للعقول الشابة لفهم منطق الذكاء الاصطناعي من خلال تطوير الألعاب ورواية القصص التفاعلية.",
+    image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1200&auto=format&fit=crop", // Film/Creative Production Visual
+    tags: ["صناع", "برمجة", "إبداع"],
+    description: "مسار مصمم خصيصاً لأي شخص لديه شغف بالبناء. تعلم كيف تحول أفكارك إلى حقيقة باستخدام قوة الذكاء الاصطناعي في صناعة الأفلام والبحث العميق.",
     rating: "4.9",
     duration: "4 أسابيع",
-    ageGroup: "8 - 12 سنة",
+    ageGroup: "جميع الأعمار الشغوفة",
     price: "2500",
     schedule: "الثلاثاء والخميس، 4:00 م",
     features: [
-      "البرمجة المنطقية المرئية",
-      "فن توليد الصور بالذكاء الاصطناعي",
-      "أساسيات تصميم الألعاب",
-      "رواية القصص التفاعلية"
+      "البرمجة المنطقية والذكاء الاصطناعي",
+      "توليد الصور والفنون الرقمية",
+      "أساسيات تطوير المنتجات",
+      "بناء حلول لمشاكل حقيقية"
     ],
     learningOutcomes: [
-      { title: "التفكير المنطقي", description: "تفكيك المشكلات المعقدة إلى خطوات صغيرة قابلة للحل." },
-      { title: "إبداع فنون الذكاء الاصطناعي", description: "استخدام أدوات مثل Midjourney بأمان للتعبير عن الإبداع." },
-      { title: "سكراتش وبايثون", description: "تعلم أساسيات البرمجة باستخدام أدوات مرئية ونصية." },
-      { title: "الروبوتات الجماعية", description: "التعاون مع الأقران لحل تحديات ملموسة بالذكاء الاصطناعي." }
+      { title: "التفكير التصميمي", description: "تفكيك المشكلات المعقدة إلى خطوات صغيرة قابلة للحل باستخدام التكنولوجيا." },
+      { title: "إبداع المحتوى الذكي", description: "استخدام أدوات الإنشاء الذكية بأمان للتعبير عن الأفكار المبتكرة." },
+      { title: "البرمجة كأداة بناء", description: "تعلم البرمجة ليس كهدف، بل كأداة لصناعة كل ما تتخيله." },
+      { title: "العمل الجماعي التقني", description: "التعاون مع مبتكرين آخرين لحل تحديات ملموسة." }
     ],
     testimonials: [
-      { name: "والدة أحمد", role: "ولي أمر", quote: "كان ابني يكتفي باللعب، الآن يحاول البناء. التغيير في العقلية كان مذهلاً.", avatar: "https://i.pravatar.cc/150?u=ahmedmom" },
-      { name: "سارة ب.", role: "طالبة (11 سنة)", quote: "صناعة فنون الذكاء الاصطناعي كانت الجزء المفضل لدي. تعلمت أن البرمجة هي قوة خارقة!", avatar: "https://i.pravatar.cc/150?u=sarah" }
+      { name: "عمر ك.", role: "مصمم حر", quote: "البرمجة كانت تبدو صعبة، لكن هنا تعلمت أنها مجرد وسيلة لتحقيق شغفي.", avatar: "https://i.pravatar.cc/150?u=omar" },
+      { name: "سارة ب.", role: "مبتكرة", quote: "صناعة أدوات الذكاء الاصطناعي الخاصة بي كانت الجزء المفضل لدي. أي شخص شغوف يمكنه القيام بذلك!", avatar: "https://i.pravatar.cc/150?u=sarah" }
     ],
     sessions: [
       { date: "15 أكتوبر - 12 نوفمبر", time: "16:00 - 17:30", status: "Waitlist", statusAr: "قائمة الانتظار" },
@@ -155,11 +155,11 @@ export const initialCourses: Course[] = [
 ];
 
 export const initialSiteSettings: SiteSettings = {
-  academyName: "أكاديمية الذكاء الاصطناعي",
-  contactEmail: "contact@techkids.ma",
+  academyName: "أكاديمية الصناع الذكية",
+  contactEmail: "contact@makerlab.ma",
   whatsappNumber: "+212 600 000 000",
-  heroTitle: "احلـم. ابـنِ. انطلـق.",
-  heroDescription: "تمكين الأطفال من إتقان الذكاء الاصطناعي، برمجة أحلامهم، وحل مشكلات العالم الحقيقي بأدوات الغد."
+  heroTitle: "أي شخص بشغف يمكنه أن يكون صانعاً بالذكاء الاصطناعي",
+  heroDescription: "لا حدود للإبداع. نحن نوفر لك الأدوات والبيئة لتتحول من مجرد مستخدم للتكنولوجيا إلى صانع ومبتكر يحل مشكلات العالم الحقيقي عبر البحث العميق وتحليل البيانات."
 };
 
 export const initialPartners: Partner[] = [
@@ -174,16 +174,16 @@ export const initialPortfolio: PortfolioProject[] = [
     id: 'p1',
     title: 'نظام إدارة التعليم الذكي',
     client: 'مجموعة مدارس النخبة',
-    category: 'SaaS / AI',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800',
-    description: 'منصة متكاملة لأتمتة المهام الإدارية وتخصيص تجربة التعلم لكل طالب باستخدام الذكاء الاصطناعي.'
+    category: 'Data Science',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800', // Data Science Visual
+    description: 'منصة متكاملة لأتمتة المهام الإدارية وتخصيص تجربة التعلم لكل طالب باستخدام خوارزميات تحليل البيانات المتقدمة.'
   },
   {
     id: 'p2',
-    title: 'مساعد خدمة العملاء الآلي',
-    client: 'شركة تأمين كبرى',
-    category: 'AI Chatbot',
-    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?q=80&w=800',
-    description: 'بوت ذكي قادر على معالجة المطالبات والرد على استفسارات العملاء بـ ١٢ لغة مختلفة بدقة ٩٨٪.'
+    title: 'مساعد الإنتاج السينمائي الآلي',
+    client: 'استوديو إبداع',
+    category: 'AI Film Production',
+    image: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=800', // Film/Video Visual
+    description: 'بوت ذكي يساعد المخرجين في جدولة المشاهد وتحليل السيناريو وتوقع احتياجات الإضاءة باستخدام البحث العميق.'
   }
 ];
