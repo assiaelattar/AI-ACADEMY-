@@ -5,9 +5,11 @@ import { SiteSettings } from './data';
 
 interface HeroProps {
   siteSettings: SiteSettings;
+  language: 'AR' | 'EN';
+  onRegisterClick?: () => void;
 }
 
-const buildables = [
+const buildablesAr = [
   "تطبيق SaaS متكامل",
   "فيلماً سينمائياً",
   "نظام ERP ذكي",
@@ -17,11 +19,23 @@ const buildables = [
   "تطبيق جوال"
 ];
 
-const Hero: React.FC<HeroProps> = ({ siteSettings }) => {
+const buildablesEn = [
+  "Full SaaS App",
+  "Cinematic Film",
+  "Smart ERP System",
+  "Global Website",
+  "Interactive Game",
+  "Ad Campaign",
+  "Mobile App"
+];
+
+const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) => {
   const [offset, setOffset] = useState(0);
   const [buildIndex, setBuildIndex] = useState(0);
   const [fade, setFade] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const buildables = language === 'AR' ? buildablesAr : buildablesEn;
 
   useEffect(() => {
     let animationFrameId: number;
@@ -39,10 +53,16 @@ const Hero: React.FC<HeroProps> = ({ siteSettings }) => {
       setTimeout(() => {
         setBuildIndex((prev) => (prev + 1) % buildables.length);
         setFade(true);
-      }, 400); // Wait for fade out
+      }, 400); 
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [buildables.length]);
+
+  const handlePortfolioClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const portfolio = document.getElementById('portfolio');
+    if (portfolio) portfolio.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div ref={containerRef} className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center items-center pt-20 bg-slate-50 pb-20">
@@ -77,17 +97,16 @@ const Hero: React.FC<HeroProps> = ({ siteSettings }) => {
 
       <div className="relative z-20 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <div className="lg:col-span-7 text-center lg:text-right space-y-10">
-          <div className="flex flex-col lg:items-start gap-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-200 bg-white/80 backdrop-blur-sm text-[11px] font-black uppercase text-cyan-600 shadow-sm self-center lg:self-start">
+        <div className={`lg:col-span-7 text-center ${language === 'AR' ? 'lg:text-right' : 'lg:text-left'} space-y-10`}>
+          <div className={`flex flex-col ${language === 'AR' ? 'lg:items-start' : 'lg:items-end'} gap-4`}>
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-200 bg-white/80 backdrop-blur-sm text-[11px] font-black uppercase text-cyan-600 shadow-sm self-center ${language === 'AR' ? 'lg:self-start' : 'lg:self-end'}`}>
               <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
-              مختبر الابتكار والذكاء الاصطناعي
+              {language === 'AR' ? 'مختبر الابتكار والذكاء الاصطناعي' : 'AI & Innovation Foundry'}
             </div>
             
             <div className="space-y-4">
               <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black leading-[1.05] tracking-tighter text-slate-900">
-                مع الذكاء الاصطناعي،<br />
-                يمكنك أن تبني <br />
+                {language === 'AR' ? <>مع الذكاء الاصطناعي،<br />يمكنك أن تبني <br /></> : <>With AI,<br />You Can Build <br /></>}
                 <span className={`inline-block transition-all duration-500 transform ${fade ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'} text-transparent bg-clip-text bg-gradient-to-l from-cyan-500 via-blue-600 to-indigo-600 min-h-[1.2em]`}>
                   {buildables[buildIndex]}
                 </span>
@@ -96,18 +115,25 @@ const Hero: React.FC<HeroProps> = ({ siteSettings }) => {
           </div>
           
           <p className="text-xl text-slate-500 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
-            نحن لا نعلمك الأدوات فقط، بل نمكنك من تحويل أي فكرة شغوفة إلى منتج حقيقي. من الأنظمة المعقدة إلى الفنون السينمائية، الذكاء الاصطناعي هو محركك الجديد.
+            {language === 'AR' ? siteSettings.heroDescription : siteSettings.heroDescriptionEn}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-4">
-            <button className="group relative px-12 py-6 bg-slate-900 text-white rounded-[2.5rem] font-black text-sm uppercase overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-slate-900/20">
+          <div className={`flex flex-col sm:flex-row gap-6 justify-center ${language === 'AR' ? 'lg:justify-start' : 'lg:justify-end'} pt-4`}>
+            <button 
+              onClick={onRegisterClick}
+              className="group relative px-12 py-6 bg-slate-900 text-white rounded-[2.5rem] font-black text-sm uppercase overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-slate-900/20"
+            >
               <span className="relative z-10 flex items-center gap-2">
-                ابدأ رحلة البناء الآن <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                {language === 'AR' ? 'ابدأ رحلة البناء الآن' : 'Start Building Now'} 
+                <ArrowLeft className={`w-4 h-4 group-hover:-translate-x-1 transition-transform ${language === 'EN' ? 'rotate-180' : ''}`} />
               </span>
               <div className="absolute inset-0 bg-gradient-to-l from-cyan-500 to-blue-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></div>
             </button>
             
-            <div className="flex items-center gap-4 px-8 py-5 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm">
+            <button 
+              onClick={handlePortfolioClick}
+              className="flex items-center gap-4 px-8 py-5 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-cyan-500 transition-all active:scale-95"
+            >
               <div className="flex -space-x-3 rtl:space-x-reverse">
                 {[1,2,3].map(i => (
                   <img key={i} src={`https://i.pravatar.cc/100?u=maker${i}`} className="w-10 h-10 rounded-full border-2 border-white" alt="Maker" />
@@ -115,9 +141,9 @@ const Hero: React.FC<HeroProps> = ({ siteSettings }) => {
               </div>
               <div className="flex flex-col items-start leading-none">
                 <span className="font-black text-slate-900 text-sm">+١,٢٠٠</span>
-                <span className="text-[10px] font-bold text-slate-400 uppercase mt-1">صانع نشط حالياً</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase mt-1">{language === 'AR' ? 'صانع نشط' : 'Active Makers'}</span>
               </div>
-            </div>
+            </button>
           </div>
         </div>
 
@@ -131,11 +157,11 @@ const Hero: React.FC<HeroProps> = ({ siteSettings }) => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex items-end p-10">
-                  <div className="text-white">
-                    <p className="font-black text-2xl leading-none uppercase tracking-tight">مختبر المستقبل</p>
-                    <div className="flex items-center gap-2 mt-3">
+                  <div className="text-white text-right">
+                    <p className="font-black text-2xl leading-none uppercase tracking-tight">{language === 'AR' ? 'مختبر المستقبل' : 'Future Foundry'}</p>
+                    <div className="flex items-center gap-2 mt-3 justify-end">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                      <p className="text-[10px] font-bold uppercase opacity-80">بناء نشط الآن</p>
+                      <p className="text-[10px] font-bold uppercase opacity-80">{language === 'AR' ? 'بناء نشط الآن' : 'Active Build Now'}</p>
                     </div>
                   </div>
                 </div>
@@ -148,7 +174,7 @@ const Hero: React.FC<HeroProps> = ({ siteSettings }) => {
                 <div className="p-2 bg-cyan-500 rounded-xl text-white">
                   <Terminal size={18} />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col items-start">
                   <span className="text-[9px] font-black text-slate-400 uppercase">Input</span>
                   <span className="font-black text-xs text-slate-900">Idea.generate()</span>
                 </div>
@@ -161,7 +187,7 @@ const Hero: React.FC<HeroProps> = ({ siteSettings }) => {
                    <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center">
                       <Zap className="text-white" size={24} />
                    </div>
-                   <div className="flex flex-col">
+                   <div className="flex flex-col items-start">
                       <span className="text-[10px] font-bold text-cyan-400 uppercase">Deploy Rate</span>
                       <span className="font-black text-lg">١٠٠٪ نجاح</span>
                    </div>

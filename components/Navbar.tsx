@@ -6,13 +6,22 @@ import { SiteSettings } from './data';
 interface NavbarProps {
   onNavigate?: (page: 'home') => void;
   onAdminClick?: () => void;
+  onRegisterClick?: () => void;
   siteSettings: SiteSettings;
+  language: 'AR' | 'EN';
+  onLanguageToggle: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavigate, onAdminClick, siteSettings }) => {
+const Navbar: React.FC<NavbarProps> = ({ 
+  onNavigate, 
+  onAdminClick, 
+  onRegisterClick,
+  siteSettings, 
+  language, 
+  onLanguageToggle 
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [lang, setLang] = useState<'AR' | 'EN'>('AR');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,17 +40,31 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onAdminClick, siteSettings 
   const scrollToSection = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     if (onNavigate) onNavigate('home');
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
+    
+    // Small delay to ensure view has switched if not on home
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setIsMenuOpen(false);
+      }
+    }, 10);
   };
 
-  const toggleLang = () => {
-    setLang(prev => prev === 'AR' ? 'EN' : 'AR');
-    // Actual translation logic would go here
+  const menuItems = {
+    AR: [
+      { label: 'البرامج', id: 'courses' },
+      { label: 'المشاريع', id: 'portfolio' },
+      { label: 'للشركات', id: 'business' },
+    ],
+    EN: [
+      { label: 'Programs', id: 'courses' },
+      { label: 'Portfolio', id: 'portfolio' },
+      { label: 'For Business', id: 'business' },
+    ]
   };
+
+  const currentMenu = menuItems[language];
 
   return (
     <nav 
@@ -53,66 +76,100 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onAdminClick, siteSettings 
         <Logo 
           showText 
           siteSettings={siteSettings}
+          language={language}
           className="cursor-pointer hover:scale-105 transition-transform" 
           onClick={handleHomeClick} 
         />
 
         <div className="hidden md:flex items-center gap-8 font-bold text-slate-600">
-          <a href="#courses" onClick={(e) => scrollToSection(e, 'courses')} className="hover:text-cyan-600 transition-colors text-xs font-black uppercase">البرامج</a>
-          <a href="#portfolio" onClick={(e) => scrollToSection(e, 'portfolio')} className="hover:text-cyan-600 transition-colors text-xs font-black uppercase">معرض المشاريع</a>
-          <a href="#business" onClick={(e) => scrollToSection(e, 'business')} className="hover:text-cyan-600 transition-colors text-xs font-black uppercase">للشركات</a>
+          {currentMenu.map(item => (
+            <a 
+              key={item.id} 
+              href={`#${item.id}`} 
+              onClick={(e) => scrollToSection(e, item.id)} 
+              className="hover:text-cyan-600 transition-colors text-xs font-black uppercase"
+            >
+              {item.label}
+            </a>
+          ))}
           
           <button 
-            onClick={toggleLang}
+            onClick={onLanguageToggle}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 text-[10px] font-black hover:bg-slate-200 transition-colors"
           >
-            <Globe size={14} /> {lang}
+            <Globe size={14} /> {language}
           </button>
 
           <button 
             onClick={onAdminClick}
             className="text-slate-300 hover:text-slate-900 transition-colors p-2"
-            title="لوحة الإدارة"
+            title="Dashboard"
           >
             <Lock size={16} />
           </button>
           
-          <button className="bg-slate-900 text-white px-8 py-3 rounded-2xl hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 font-black text-[10px] uppercase border border-slate-800">
-            سجل الآن
+          <button 
+            onClick={onRegisterClick}
+            className="bg-slate-900 text-white px-8 py-3 rounded-2xl hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 font-black text-[10px] uppercase border border-slate-800"
+          >
+            {language === 'AR' ? 'سجل الآن' : 'Register Now'}
           </button>
         </div>
 
         <button 
-          className="md:hidden p-2 text-slate-900"
+          className="md:hidden p-2 text-slate-900 z-[60]"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
 
-      {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white border-b border-slate-100 p-8 md:hidden flex flex-col gap-6 shadow-2xl animate-in slide-in-from-top duration-300">
-          <div className="flex justify-between items-center pb-4 border-b border-slate-50">
-            <span className="text-[10px] font-black uppercase text-slate-400">القائمة</span>
-            <button 
-              onClick={toggleLang}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-black uppercase"
-            >
-              <Globe size={16} /> {lang === 'AR' ? 'English' : 'العربية'}
-            </button>
-          </div>
-          
-          <a href="#courses" onClick={(e) => scrollToSection(e, 'courses')} className="text-xl font-black text-slate-800 uppercase">البرامج</a>
-          <a href="#portfolio" onClick={(e) => scrollToSection(e, 'portfolio')} className="text-xl font-black text-slate-800 uppercase">المشاريع</a>
-          <a href="#business" onClick={(e) => scrollToSection(e, 'business')} className="text-xl font-black text-slate-800 uppercase">للشركات</a>
-          
-          <button onClick={() => { if(onAdminClick) onAdminClick(); setIsMenuOpen(false); }} className="text-right text-xl font-black text-slate-800 uppercase">الإدارة</button>
-          
-          <button className="bg-cyan-500 text-white px-6 py-5 rounded-2xl font-black w-full text-lg shadow-xl shadow-cyan-500/20 uppercase mt-4">
-            سجل الآن
+      {/* Mobile Menu */}
+      <div className={`fixed inset-0 bg-white z-50 transition-transform duration-500 ease-in-out transform ${isMenuOpen ? 'translate-x-0' : (language === 'AR' ? 'translate-x-full' : '-translate-x-full')} md:hidden flex flex-col p-8 pt-24 gap-8`}>
+        <div className="flex justify-between items-center pb-6 border-b border-slate-100">
+          <span className="text-[10px] font-black uppercase text-slate-400">{language === 'AR' ? 'القائمة' : 'Menu'}</span>
+          <button 
+            onClick={() => {
+              onLanguageToggle();
+              // Small delay to visual update before close? or just toggle
+            }}
+            className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl text-xs font-black uppercase active:scale-95 transition-transform"
+          >
+            <Globe size={18} /> {language === 'AR' ? 'English' : 'العربية'}
           </button>
         </div>
-      )}
+        
+        {currentMenu.map(item => (
+          <a 
+            key={item.id}
+            href={`#${item.id}`} 
+            onClick={(e) => scrollToSection(e, item.id)} 
+            className="text-4xl font-black text-slate-800 uppercase tracking-tighter"
+          >
+            {item.label}
+          </a>
+        ))}
+        
+        <button 
+          onClick={() => { if(onAdminClick) onAdminClick(); setIsMenuOpen(false); }} 
+          className="text-right text-4xl font-black text-slate-800 uppercase tracking-tighter"
+        >
+          {language === 'AR' ? 'الإدارة' : 'Dashboard'}
+        </button>
+        
+        <div className="mt-auto space-y-4">
+          <button 
+            onClick={() => { if(onRegisterClick) onRegisterClick(); setIsMenuOpen(false); }}
+            className="bg-cyan-500 text-white px-6 py-6 rounded-[2.5rem] font-black w-full text-xl shadow-2xl shadow-cyan-500/30 uppercase"
+          >
+            {language === 'AR' ? 'سجل الآن' : 'Register Now'}
+          </button>
+          
+          <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            Makerlab &copy; 2024
+          </p>
+        </div>
+      </div>
     </nav>
   );
 };

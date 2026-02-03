@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -12,13 +12,15 @@ import {
   SiteSettings, initialSiteSettings, Partner, PortfolioProject,
   initialPartners, initialPortfolio 
 } from './components/data';
-import { Building2, Rocket, Briefcase, Layout, ChevronLeft } from 'lucide-react';
+import { Building2, Rocket, Briefcase, Layout, ChevronLeft, X, CheckCircle, Loader2 } from 'lucide-react';
 
 type ViewState = 'home' | 'course-detail' | 'admin';
 
 export default function App() {
   const [view, setView] = useState<ViewState>('home');
   const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
+  const [language, setLanguage] = useState<'AR' | 'EN'>('AR');
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
@@ -30,6 +32,12 @@ export default function App() {
   const [siteSettings, setSiteSettings] = useState<SiteSettings>(initialSiteSettings);
   const [partners, setPartners] = useState<Partner[]>(initialPartners);
   const [portfolio, setPortfolio] = useState<PortfolioProject[]>(initialPortfolio);
+
+  // Sync document direction
+  useEffect(() => {
+    document.dir = language === 'AR' ? 'rtl' : 'ltr';
+    document.documentElement.lang = language === 'AR' ? 'ar' : 'en';
+  }, [language]);
 
   const handleCourseSelect = (courseId: string) => {
     setSelectedCourseId(courseId);
@@ -47,6 +55,10 @@ export default function App() {
     setView('admin');
   };
 
+  const toggleLanguage = () => {
+    setLanguage(prev => prev === 'AR' ? 'EN' : 'AR');
+  };
+
   const handleEnroll = (courseId: string, studentName: string, email: string, mode: 'campus' | 'online') => {
     const course = courses.find(c => c.id === courseId);
     if (!course) return;
@@ -58,7 +70,7 @@ export default function App() {
       studentName,
       parentName: 'Parent',
       email,
-      age: 12,
+      age: 25,
       mode,
       status: 'pending',
       date: new Date().toISOString()
@@ -102,7 +114,7 @@ export default function App() {
       return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-slate-950 px-6">
           <div className="mb-10 animate-in fade-in slide-in-from-top-4 duration-1000">
-             <Logo size={120} showText dark className="items-center" siteSettings={siteSettings} />
+             <Logo size={120} showText dark className="items-center" siteSettings={siteSettings} language={language} />
           </div>
           <form onSubmit={handleAdminLogin} className="bg-slate-900 p-10 rounded-[2.5rem] shadow-2xl border border-slate-800 max-w-md w-full animate-in fade-in zoom-in-95 duration-500">
             <h2 className="text-2xl font-black text-white mb-2 text-center uppercase tracking-tight">الدخول للوحة التحكم</h2>
@@ -144,19 +156,28 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900" dir="rtl">
-      <Navbar siteSettings={siteSettings} onNavigate={(page) => { if(page === 'home') handleNavigateHome(); }} onAdminClick={handleNavigateAdmin} />
+    <div className={`min-h-screen bg-slate-50 text-slate-900`} dir={language === 'AR' ? 'rtl' : 'ltr'}>
+      <Navbar 
+        siteSettings={siteSettings} 
+        language={language} 
+        onLanguageToggle={toggleLanguage}
+        onNavigate={(page) => { if(page === 'home') handleNavigateHome(); }} 
+        onAdminClick={handleNavigateAdmin} 
+        onRegisterClick={() => setIsRegistrationOpen(true)}
+      />
       <main>
         {view === 'course-detail' && selectedCourseData ? (
           <CourseDetail course={selectedCourseData} onBack={handleNavigateHome} onEnroll={handleEnroll} onBrochureRequest={handleBrochureRequest} />
         ) : (
           <>
-            <Hero siteSettings={siteSettings} />
+            <Hero siteSettings={siteSettings} language={language} onRegisterClick={() => setIsRegistrationOpen(true)} />
             
             {/* Partners Marquee */}
             <section className="py-12 bg-white border-y border-slate-100 overflow-hidden">
                <div className="max-w-7xl mx-auto px-6">
-                 <p className="text-center text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-8">شركاء النجاح في مختبر الابتكار</p>
+                 <p className="text-center text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-8">
+                   {language === 'AR' ? 'شركاء النجاح في مختبر الابتكار' : 'Innovation Partners & Supporters'}
+                 </p>
                  <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60">
                    {partners.map(p => (
                      <img key={p.id} src={p.logo} alt={p.name} className="h-8 md:h-12 grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer" />
@@ -173,19 +194,33 @@ export default function App() {
               <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                  <div className="space-y-8">
                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-[11px] font-black uppercase">
-                     <Building2 size={14} className="text-cyan-400" /> حلول للأعمال والشركات
+                     <Building2 size={14} className="text-cyan-400" /> {language === 'AR' ? 'حلول للأعمال والشركات' : 'Business Solutions'}
                    </div>
-                   <h2 className="text-5xl md:text-7xl font-black text-slate-900 leading-none">ابنِ منتج <span className="text-transparent bg-clip-text bg-gradient-to-l from-cyan-600 to-blue-600">SaaS</span> الخاص بشركتك</h2>
-                   <p className="text-xl text-slate-500 font-medium leading-relaxed">نحن لا نعلم الطلاب فحسب، بل نبني حلولاً تقنية حقيقية. فريقنا المتخصص يساعد الشركات على أتمتة عملياتها وبناء وكلاء ذكاء اصطناعي مخصصين.</p>
+                   <h2 className="text-5xl md:text-7xl font-black text-slate-900 leading-none">
+                     {language === 'AR' ? <>ابنِ منتج <span className="text-transparent bg-clip-text bg-gradient-to-l from-cyan-600 to-blue-600">SaaS</span> الخاص بشركتك</> : <>Build Your Own <span className="text-transparent bg-clip-text bg-gradient-to-l from-cyan-600 to-blue-600">SaaS</span> Product</>}
+                   </h2>
+                   <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                     {language === 'AR' 
+                       ? 'نحن لا نعلم الطلاب فحسب، بل نبني حلولاً تقنية حقيقية. فريقنا المتخصص يساعد الشركات على أتمتة عملياتها وبناء وكلاء ذكاء اصطناعي مخصصين.' 
+                       : 'We don\'t just teach students; we build real-world tech solutions. Our specialized team helps businesses automate workflows and build custom AI agents.'}
+                   </p>
                    <div className="space-y-4">
-                     {['تطوير منتجات SaaS مخصصة', 'أتمتة العمليات بالذكاء الاصطناعي', 'بناء وكلاء دعم مخصصين'].map(item => (
+                     {(language === 'AR' 
+                       ? ['تطوير منتجات SaaS مخصصة', 'أتمتة العمليات بالذكاء الاصطناعي', 'بناء وكلاء دعم مخصصين']
+                       : ['Custom SaaS Development', 'AI Workflow Automation', 'Custom Support Agents']
+                     ).map(item => (
                        <div key={item} className="flex items-center gap-3 font-bold text-slate-700">
                          <div className="w-6 h-6 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-600"><Rocket size={14} /></div>
                          {item}
                        </div>
                      ))}
                    </div>
-                   <button className="px-10 py-5 bg-slate-900 text-white rounded-2xl font-black uppercase hover:bg-cyan-600 transition-all shadow-xl shadow-slate-900/10 flex items-center gap-4">ابدأ مشروعك معنا <ChevronLeft size={20}/></button>
+                   <button 
+                    onClick={() => setIsRegistrationOpen(true)}
+                    className="px-10 py-5 bg-slate-900 text-white rounded-2xl font-black uppercase hover:bg-cyan-600 transition-all shadow-xl shadow-slate-900/10 flex items-center gap-4 active:scale-95"
+                   >
+                     {language === 'AR' ? 'ابدأ مشروعك معنا' : 'Start Your Project'} <ChevronLeft size={20} className={language === 'EN' ? 'rotate-180' : ''}/>
+                   </button>
                  </div>
                  <div className="relative">
                    <div className="w-full aspect-square bg-slate-100 rounded-[4rem] overflow-hidden rotate-3">
@@ -193,7 +228,7 @@ export default function App() {
                    </div>
                    <div className="absolute -bottom-10 -left-10 p-8 bg-white shadow-2xl rounded-[2.5rem] border border-slate-100 animate-float">
                       <p className="text-cyan-600 font-black text-4xl leading-none">٩٨٪</p>
-                      <p className="text-slate-400 text-[10px] font-black uppercase mt-1">نسبة رضا العملاء</p>
+                      <p className="text-slate-400 text-[10px] font-black uppercase mt-1">{language === 'AR' ? 'نسبة رضا العملاء' : 'Customer Satisfaction'}</p>
                    </div>
                  </div>
               </div>
@@ -203,8 +238,8 @@ export default function App() {
             <section id="portfolio" className="py-32 bg-slate-50">
                <div className="max-w-7xl mx-auto px-6">
                   <div className="text-center mb-20 space-y-4">
-                    <h2 className="text-[11px] font-black text-cyan-600 uppercase tracking-widest">معرض أعمالنا</h2>
-                    <h3 className="text-5xl font-black uppercase">مشاريع <span className="text-slate-400">حقيقية</span> لعملاء حقيقيين</h3>
+                    <h2 className="text-[11px] font-black text-cyan-600 uppercase tracking-widest">{language === 'AR' ? 'معرض أعمالنا' : 'Our Portfolio'}</h2>
+                    <h3 className="text-5xl font-black uppercase">{language === 'AR' ? <>مشاريع <span className="text-slate-400">حقيقية</span> لعملاء حقيقيين</> : <>Real <span className="text-slate-400">Projects</span> For Real Clients</>}</h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     {portfolio.map(project => (
@@ -217,7 +252,9 @@ export default function App() {
                            <p className="text-cyan-500 font-black text-xs uppercase mb-2">{project.client}</p>
                            <h4 className="text-3xl font-black uppercase mb-4">{project.title}</h4>
                            <p className="text-slate-500 font-medium leading-relaxed mb-8">{project.description}</p>
-                           <button className="flex items-center gap-3 text-slate-900 font-black uppercase text-xs hover:text-cyan-600 transition-colors">عرض دراسة الحالة <ChevronLeft size={16}/></button>
+                           <button className="flex items-center gap-3 text-slate-900 font-black uppercase text-xs hover:text-cyan-600 transition-colors">
+                             {language === 'AR' ? 'عرض دراسة الحالة' : 'View Case Study'} <ChevronLeft size={16} className={language === 'EN' ? 'rotate-180' : ''}/>
+                           </button>
                         </div>
                       </div>
                     ))}
@@ -228,6 +265,49 @@ export default function App() {
         )}
       </main>
       <Footer siteSettings={siteSettings} />
+
+      {/* Global Registration Modal */}
+      {isRegistrationOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="bg-white rounded-[2.5rem] sm:rounded-[3.5rem] w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl relative p-8 sm:p-12">
+            <button 
+              onClick={() => setIsRegistrationOpen(false)}
+              className="absolute top-6 right-6 p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors"
+            >
+              <X size={20} />
+            </button>
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-black uppercase tracking-tighter mb-2">
+                {language === 'AR' ? 'انضم لمختبر الصناع' : 'Join The Maker Foundry'}
+              </h2>
+              <p className="text-slate-500 font-medium">
+                {language === 'AR' ? 'ابدأ رحلتك في بناء المستقبل مع الذكاء الاصطناعي.' : 'Start your journey in building the future with AI.'}
+              </p>
+            </div>
+            
+            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsRegistrationOpen(false); alert(language === 'AR' ? 'تم التسجيل بنجاح!' : 'Successfully Registered!'); }}>
+               <div className="space-y-1">
+                 <label className="text-[10px] font-black uppercase text-slate-400">{language === 'AR' ? 'الاسم الكامل' : 'Full Name'}</label>
+                 <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 text-sm font-bold" />
+               </div>
+               <div className="space-y-1">
+                 <label className="text-[10px] font-black uppercase text-slate-400">{language === 'AR' ? 'البريد الإلكتروني' : 'Email Address'}</label>
+                 <input required type="email" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 text-sm font-bold" />
+               </div>
+               <div className="space-y-1">
+                 <label className="text-[10px] font-black uppercase text-slate-400">{language === 'AR' ? 'البرنامج المفضل' : 'Preferred Program'}</label>
+                 <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 text-sm font-bold appearance-none">
+                    {courses.map(c => <option key={c.id} value={c.id}>{c.title}</option>)}
+                    <option value="business">{language === 'AR' ? 'حلول للأعمال' : 'Business Solutions'}</option>
+                 </select>
+               </div>
+               <button type="submit" className="w-full bg-slate-900 text-white font-black py-5 rounded-2xl hover:bg-cyan-500 hover:text-slate-950 transition-all uppercase text-xs shadow-xl shadow-slate-950/20 mt-4">
+                 {language === 'AR' ? 'إرسال طلب الانضمام' : 'Submit Join Request'}
+               </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

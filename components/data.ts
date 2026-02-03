@@ -39,10 +39,13 @@ export interface Course {
 
 export interface SiteSettings {
   academyName: string;
+  academyNameEn: string;
   contactEmail: string;
   whatsappNumber: string;
   heroTitle: string;
+  heroTitleEn: string;
   heroDescription: string;
+  heroDescriptionEn: string;
 }
 
 export interface Partner {
@@ -156,10 +159,13 @@ export const initialCourses: Course[] = [
 
 export const initialSiteSettings: SiteSettings = {
   academyName: "أكاديمية الصناع الذكية",
+  academyNameEn: "Maker Intelligence Academy",
   contactEmail: "contact@makerlab.ma",
   whatsappNumber: "+212 600 000 000",
   heroTitle: "مع الذكاء الاصطناعي، يمكنك أن تبني المستحيل",
-  heroDescription: "تحول من مجرد مستخدم إلى صانع حقيقي. نحن نوفر لك الأدوات والبيئة لتطوير حلول ذكية، أفلام، وأنظمة برمجية متكاملة بضغطة زر واحدة."
+  heroTitleEn: "With AI, You Can Build Anything",
+  heroDescription: "تحول من مجرد مستخدم إلى صانع حقيقي. نحن نوفر لك الأدوات والبيئة لتطوير حلول ذكية، أفلام، وأنظمة برمجية متكاملة بضغطة زر واحدة.",
+  heroDescriptionEn: "Transform from a user to a true maker. We provide the tools and environment to develop smart solutions, films, and integrated software systems with one click."
 };
 
 export const initialPartners: Partner[] = [
