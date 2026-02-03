@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -35,13 +35,13 @@ const Navbar: React.FC<NavbarProps> = ({
     e.preventDefault();
     if (onNavigate) onNavigate('home');
     window.scrollTo(0, 0);
+    setIsMenuOpen(false);
   };
 
   const scrollToSection = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     if (onNavigate) onNavigate('home');
     
-    // Small delay to ensure view has switched if not on home
     setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const handleLanguageToggle = () => {
     onLanguageToggle();
-    setIsMenuOpen(false); // Close menu on mobile after toggle to reflect change immediately
+    setIsMenuOpen(false);
   };
 
   const menuItems = {
@@ -73,11 +73,13 @@ const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 md:px-12 py-4 ${
-        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 px-4 md:px-12 py-3 md:py-4 ${
+        isScrolled || isMenuOpen 
+          ? 'bg-white shadow-md border-b border-slate-100' 
+          : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="max-w-7xl mx-auto flex justify-between items-center relative z-[110]">
         <Logo 
           showText 
           siteSettings={siteSettings}
@@ -86,13 +88,14 @@ const Navbar: React.FC<NavbarProps> = ({
           onClick={handleHomeClick} 
         />
 
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 font-bold text-slate-600">
           {currentMenu.map(item => (
             <a 
               key={item.id} 
               href={`#${item.id}`} 
               onClick={(e) => scrollToSection(e, item.id)} 
-              className="hover:text-cyan-600 transition-colors text-xs font-black uppercase"
+              className="hover:text-cyan-600 transition-colors text-[11px] font-black uppercase tracking-tight"
             >
               {item.label}
             </a>
@@ -121,50 +124,80 @@ const Navbar: React.FC<NavbarProps> = ({
           </button>
         </div>
 
+        {/* Mobile Toggle Button */}
         <button 
-          className="md:hidden p-2 text-slate-900 z-[60]"
+          className="md:hidden p-2 text-slate-900 focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle Menu"
         >
-          {isMenuOpen ? <X /> : <Menu />}
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-white z-50 transition-transform duration-500 ease-in-out transform ${isMenuOpen ? 'translate-x-0' : (language === 'AR' ? 'translate-x-full' : '-translate-x-full')} md:hidden flex flex-col p-8 pt-24 gap-8`}>
-        <div className="flex justify-between items-center pb-6 border-b border-slate-100">
-          <span className="text-[10px] font-black uppercase text-slate-400">{language === 'AR' ? 'القائمة' : 'Menu'}</span>
+      {/* Mobile Menu Overlay */}
+      <div 
+        className={`fixed inset-0 bg-white z-[105] transition-all duration-500 ease-in-out transform ${
+          isMenuOpen 
+            ? 'translate-y-0 opacity-100' 
+            : '-translate-y-full opacity-0'
+        } md:hidden flex flex-col p-6 pt-24 overflow-y-auto`}
+      >
+        <div className="flex justify-between items-center pb-6 border-b border-slate-100 mb-8">
+          <span className="text-[11px] font-black uppercase text-slate-400 tracking-widest">
+            {language === 'AR' ? 'القائمة الرئيسية' : 'MAIN MENU'}
+          </span>
           <button 
             onClick={handleLanguageToggle}
-            className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl text-xs font-black uppercase active:scale-95 transition-transform"
+            className="flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-900 rounded-xl text-[10px] font-black uppercase active:scale-95 transition-all"
           >
-            <Globe size={18} /> {language === 'AR' ? 'English' : 'العربية'}
+            <Globe size={16} /> {language === 'AR' ? 'English' : 'العربية'}
           </button>
         </div>
         
-        {currentMenu.map(item => (
-          <a 
-            key={item.id}
-            href={`#${item.id}`} 
-            onClick={(e) => scrollToSection(e, item.id)} 
-            className={`${language === 'AR' ? 'text-right' : 'text-left'} text-4xl font-black text-slate-800 uppercase tracking-tighter`}
+        <div className="flex flex-col gap-6">
+          {currentMenu.map(item => (
+            <a 
+              key={item.id}
+              href={`#${item.id}`} 
+              onClick={(e) => scrollToSection(e, item.id)} 
+              className={`text-3xl font-black text-slate-900 uppercase tracking-tighter hover:text-cyan-500 transition-colors ${
+                language === 'AR' ? 'text-right' : 'text-left'
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+          
+          <button 
+            onClick={() => { if(onAdminClick) onAdminClick(); setIsMenuOpen(false); }} 
+            className={`text-3xl font-black text-slate-900 uppercase tracking-tighter hover:text-cyan-500 transition-colors ${
+              language === 'AR' ? 'text-right' : 'text-left'
+            }`}
           >
-            {item.label}
-          </a>
-        ))}
+            {language === 'AR' ? 'لوحة التحكم' : 'Dashboard'}
+          </button>
+        </div>
         
-        <button 
-          onClick={() => { if(onAdminClick) onAdminClick(); setIsMenuOpen(false); }} 
-          className={`${language === 'AR' ? 'text-right' : 'text-left'} text-4xl font-black text-slate-800 uppercase tracking-tighter`}
-        >
-          {language === 'AR' ? 'الإدارة' : 'Dashboard'}
-        </button>
-        
-        <div className="mt-auto space-y-4">
+        <div className="mt-auto pt-10 space-y-4">
           <button 
             onClick={() => { if(onRegisterClick) onRegisterClick(); setIsMenuOpen(false); }}
-            className="bg-cyan-500 text-white px-6 py-6 rounded-[2.5rem] font-black w-full text-xl shadow-2xl shadow-cyan-500/30 uppercase"
+            className="bg-slate-900 text-white px-6 py-5 rounded-[2rem] font-black w-full text-lg shadow-xl hover:bg-cyan-600 transition-all uppercase"
           >
             {language === 'AR' ? 'سجل الآن' : 'Register Now'}
           </button>
           
-          <p className="text-
+          <div className="text-center space-y-2">
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+              {siteSettings.academyNameEn} &copy; 2024
+            </p>
+            <div className="flex justify-center gap-6 text-slate-300">
+               {/* Small icons or extra links can go here */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

@@ -51,21 +51,21 @@ const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) 
   };
 
   return (
-    <div ref={containerRef} className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center items-center pt-20 bg-slate-50 pb-20">
+    <div ref={containerRef} className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center items-center pt-24 md:pt-32 bg-slate-50 pb-16 md:pb-24">
       
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-100 rounded-full blur-[120px] animate-blob"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-100 rounded-full blur-[120px] animate-blob animation-delay-4000"></div>
+        <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-cyan-100 rounded-full blur-[80px] md:blur-[120px] animate-blob"></div>
+        <div className="absolute bottom-0 left-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-indigo-100 rounded-full blur-[80px] md:blur-[120px] animate-blob animation-delay-4000"></div>
       </div>
 
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ 
         backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', 
-        backgroundSize: '40px 40px' 
+        backgroundSize: '30px 30px' 
       }}></div>
 
-      {/* Floating Text Path */}
-      <div className="absolute inset-0 z-10 pointer-events-none select-none">
+      {/* Floating Text Path - Hidden on smallest screens for clarity */}
+      <div className="absolute inset-0 z-10 pointer-events-none select-none hidden sm:block">
         <svg className="w-full h-full" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
           <path
             id="curve-path"
@@ -83,15 +83,15 @@ const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) 
 
       <div className="relative z-20 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <div className={`lg:col-span-7 text-center ${language === 'AR' ? 'lg:text-right' : 'lg:text-left'} space-y-10`}>
-          <div className={`flex flex-col ${language === 'AR' ? 'lg:items-start' : 'lg:items-end'} gap-4`}>
-            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-200 bg-white/80 backdrop-blur-sm text-[11px] font-black uppercase text-cyan-600 shadow-sm self-center ${language === 'AR' ? 'lg:self-start' : 'lg:self-end'}`}>
-              <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
+        <div className={`lg:col-span-7 text-center ${language === 'AR' ? 'lg:text-right' : 'lg:text-left'} space-y-8 md:space-y-10`}>
+          <div className={`flex flex-col ${language === 'AR' ? 'lg:items-start' : 'lg:items-end'} gap-3 md:gap-4`}>
+            <div className={`inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-cyan-200 bg-white/80 backdrop-blur-sm text-[10px] md:text-[11px] font-black uppercase text-cyan-600 shadow-sm self-center ${language === 'AR' ? 'lg:self-start' : 'lg:self-end'}`}>
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-cyan-500 animate-pulse"></span>
               {language === 'AR' ? 'مختبر الابتكار والذكاء الاصطناعي' : 'AI & Innovation Foundry'}
             </div>
             
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black leading-[1.05] tracking-tighter text-slate-900">
+            <div className="space-y-3 md:space-y-4">
+              <h1 className="text-4xl md:text-6xl lg:text-[6.5rem] font-black leading-[1.1] tracking-tighter text-slate-900">
                 {heroTitle}<br />
                 {buildables.length > 0 && (
                   <>
@@ -105,16 +105,16 @@ const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) 
             </div>
           </div>
           
-          <p className="text-xl text-slate-500 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+          <p className="text-base md:text-xl text-slate-500 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
             {heroDescription}
           </p>
           
-          <div className={`flex flex-col sm:flex-row gap-6 justify-center ${language === 'AR' ? 'lg:justify-start' : 'lg:justify-end'} pt-4`}>
+          <div className={`flex flex-col sm:flex-row gap-4 md:gap-6 justify-center ${language === 'AR' ? 'lg:justify-start' : 'lg:justify-end'} pt-2 md:pt-4`}>
             <button 
               onClick={onRegisterClick}
-              className="group relative px-12 py-6 bg-slate-900 text-white rounded-[2.5rem] font-black text-sm uppercase overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-slate-900/20"
+              className="group relative px-8 py-5 md:px-12 md:py-6 bg-slate-900 text-white rounded-2xl md:rounded-[2.5rem] font-black text-xs md:text-sm uppercase overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-xl md:shadow-2xl shadow-slate-900/20"
             >
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="relative z-10 flex items-center justify-center gap-2">
                 {language === 'AR' ? 'ابدأ رحلة البناء الآن' : 'Start Building Now'} 
                 <ArrowLeft className={`w-4 h-4 group-hover:-translate-x-1 transition-transform ${language === 'EN' ? 'rotate-180' : ''}`} />
               </span>
@@ -123,74 +123,76 @@ const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) 
             
             <button 
               onClick={handlePortfolioClick}
-              className="flex items-center gap-4 px-8 py-5 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-cyan-500 transition-all active:scale-95"
+              className="flex items-center justify-center gap-4 px-6 py-4 md:px-8 md:py-5 bg-white border-2 border-slate-100 rounded-2xl md:rounded-[2.5rem] shadow-sm hover:border-cyan-500 transition-all active:scale-95"
             >
               <div className="flex -space-x-3 rtl:space-x-reverse">
                 {[1,2,3].map(i => (
-                  <img key={i} src={`https://i.pravatar.cc/100?u=maker${i}`} className="w-10 h-10 rounded-full border-2 border-white" alt="Maker" />
+                  <img key={i} src={`https://i.pravatar.cc/100?u=maker${i}`} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white" alt="Maker" />
                 ))}
               </div>
               <div className="flex flex-col items-start leading-none">
-                <span className="font-black text-slate-900 text-sm">+١,٢٠٠</span>
-                <span className="text-[10px] font-bold text-slate-400 uppercase mt-1">{language === 'AR' ? 'صانع نشط' : 'Active Makers'}</span>
+                <span className="font-black text-slate-900 text-xs md:text-sm">+١,٢٠٠</span>
+                <span className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase mt-1">{language === 'AR' ? 'صانع نشط' : 'Active Makers'}</span>
               </div>
             </button>
           </div>
         </div>
 
-        <div className="lg:col-span-5 relative h-[600px] w-full flex items-center justify-center">
+        <div className="lg:col-span-5 relative h-[400px] md:h-[600px] w-full flex items-center justify-center">
           {/* Main Showcase Image */}
-          <div className="relative w-72 h-96 md:w-80 md:h-[480px] z-20 group">
-             <div className="w-full h-full rounded-[3.5rem] overflow-hidden shadow-2xl border-[12px] border-white bg-slate-100 transform rotate-[3deg] group-hover:rotate-0 transition-transform duration-1000">
+          <div className="relative w-56 h-72 md:w-80 md:h-[480px] z-20 group">
+             <div className="w-full h-full rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-[8px] md:border-[12px] border-white bg-slate-100 transform rotate-[3deg] group-hover:rotate-0 transition-transform duration-1000">
                 <img 
                   src={siteSettings.heroImage} 
                   alt="AI Maker Space" 
                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex items-end p-10">
-                  <div className="text-white text-right">
-                    <p className="font-black text-2xl leading-none uppercase tracking-tight">{language === 'AR' ? 'مختبر المستقبل' : 'Future Foundry'}</p>
-                    <div className="flex items-center gap-2 mt-3 justify-end">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex items-end p-6 md:p-10">
+                  <div className={`text-white w-full ${language === 'AR' ? 'text-right' : 'text-left'}`}>
+                    <p className="font-black text-xl md:text-2xl leading-none uppercase tracking-tight">{language === 'AR' ? 'مختبر المستقبل' : 'Future Foundry'}</p>
+                    <div className={`flex items-center gap-2 mt-2 md:mt-3 ${language === 'AR' ? 'justify-end' : 'justify-start'}`}>
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                      <p className="text-[10px] font-bold uppercase opacity-80">{language === 'AR' ? 'بناء نشط الآن' : 'Active Build Now'}</p>
+                      <p className="text-[9px] md:text-[10px] font-bold uppercase opacity-80">{language === 'AR' ? 'بناء نشط الآن' : 'Active Build Now'}</p>
                     </div>
                   </div>
                 </div>
              </div>
           </div>
 
-          {/* Floaters */}
-          <TechSticker className="absolute top-[5%] left-[0%] z-30 animate-float">
-             <div className="px-6 py-4 bg-white/90 backdrop-blur-xl rounded-[2rem] flex items-center gap-3 shadow-2xl border border-cyan-100 -rotate-6">
-                <div className="p-2 bg-cyan-500 rounded-xl text-white">
-                  <Terminal size={18} />
-                </div>
-                <div className="flex flex-col items-start">
-                  <span className="text-[9px] font-black text-slate-400 uppercase">Input</span>
-                  <span className="font-black text-xs text-slate-900">Idea.generate()</span>
-                </div>
-             </div>
-          </TechSticker>
+          {/* Floaters - Hidden on small mobile to avoid clutter */}
+          <div className="hidden sm:block">
+            <TechSticker className="absolute top-[5%] left-[-5%] md:left-[0%] z-30 animate-float">
+               <div className="px-4 py-3 md:px-6 md:py-4 bg-white/90 backdrop-blur-xl rounded-2xl md:rounded-[2rem] flex items-center gap-3 shadow-2xl border border-cyan-100 -rotate-6">
+                  <div className="p-1.5 md:p-2 bg-cyan-500 rounded-lg md:rounded-xl text-white">
+                    <Terminal size={16} />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-[8px] md:text-[9px] font-black text-slate-400 uppercase">Input</span>
+                    <span className="font-black text-xs text-slate-900">Idea.generate()</span>
+                  </div>
+               </div>
+            </TechSticker>
 
-          <TechSticker className="absolute bottom-[20%] right-[-5%] z-30 animate-float-delayed">
-             <div className="p-6 bg-slate-900 text-white rounded-[2.5rem] shadow-2xl border border-slate-700 rotate-12 group hover:rotate-0 transition-transform">
-                <div className="flex items-center gap-4">
-                   <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center">
-                      <Zap className="text-white" size={24} />
-                   </div>
-                   <div className="flex flex-col items-start">
-                      <span className="text-[10px] font-bold text-cyan-400 uppercase">Deploy Rate</span>
-                      <span className="font-black text-lg">١٠٠٪ نجاح</span>
-                   </div>
-                </div>
-             </div>
-          </TechSticker>
+            <TechSticker className="absolute bottom-[20%] right-[-10%] md:right-[-5%] z-30 animate-float-delayed">
+               <div className="p-4 md:p-6 bg-slate-900 text-white rounded-[2rem] md:rounded-[2.5rem] shadow-2xl border border-slate-700 rotate-12 group hover:rotate-0 transition-transform">
+                  <div className="flex items-center gap-3 md:gap-4">
+                     <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-xl md:rounded-2xl flex items-center justify-center">
+                        <Zap className="text-white" size={20} />
+                     </div>
+                     <div className="flex flex-col items-start">
+                        <span className="text-[9px] md:text-[10px] font-bold text-cyan-400 uppercase">Deploy Rate</span>
+                        <span className="font-black text-base md:text-lg">١٠٠٪ نجاح</span>
+                     </div>
+                  </div>
+               </div>
+            </TechSticker>
 
-          <TechSticker className="absolute top-[15%] right-[10%] z-30 animate-float" style={{ animationDelay: '2s' }}>
-            <div className="w-14 h-14 bg-white rounded-2xl shadow-xl flex items-center justify-center text-indigo-600 border border-slate-100 rotate-12">
-              <Sparkles size={24} />
-            </div>
-          </TechSticker>
+            <TechSticker className="absolute top-[15%] right-[5%] md:right-[10%] z-30 animate-float" style={{ animationDelay: '2s' }}>
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-white rounded-xl md:rounded-2xl shadow-xl flex items-center justify-center text-indigo-600 border border-slate-100 rotate-12">
+                <Sparkles size={20} />
+              </div>
+            </TechSticker>
+          </div>
         </div>
       </div>
     </div>

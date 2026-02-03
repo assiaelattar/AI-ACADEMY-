@@ -146,7 +146,7 @@ export const initialCourses: Course[] = [
       }
     ],
     testimonials: [
-      { name: "سامي", role: "مؤسس", quote: "بنيت مشروعي في 6 أيام.", avatar: "https://i.pravatar.cc/150?u=sami" }
+      { name: "Sami", role: "Founder", quote: "Built my startup in 6 days.", avatar: "https://i.pravatar.cc/150?u=sami" }
     ],
     sessions: [
       { date: "12 أكتوبر - 18 أكتوبر", dateEn: "Oct 12 - Oct 18", time: "09:00 - 18:00", timeEn: "9 AM - 6 PM", status: "Filling Fast", statusAr: "المقاعد محدودة", statusEn: "Filling Fast" },
