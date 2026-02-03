@@ -51,6 +51,11 @@ const Navbar: React.FC<NavbarProps> = ({
     }, 10);
   };
 
+  const handleLanguageToggle = () => {
+    onLanguageToggle();
+    setIsMenuOpen(false); // Close menu on mobile after toggle to reflect change immediately
+  };
+
   const menuItems = {
     AR: [
       { label: 'البرامج', id: 'courses' },
@@ -129,10 +134,7 @@ const Navbar: React.FC<NavbarProps> = ({
         <div className="flex justify-between items-center pb-6 border-b border-slate-100">
           <span className="text-[10px] font-black uppercase text-slate-400">{language === 'AR' ? 'القائمة' : 'Menu'}</span>
           <button 
-            onClick={() => {
-              onLanguageToggle();
-              // Small delay to visual update before close? or just toggle
-            }}
+            onClick={handleLanguageToggle}
             className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl text-xs font-black uppercase active:scale-95 transition-transform"
           >
             <Globe size={18} /> {language === 'AR' ? 'English' : 'العربية'}
@@ -144,7 +146,7 @@ const Navbar: React.FC<NavbarProps> = ({
             key={item.id}
             href={`#${item.id}`} 
             onClick={(e) => scrollToSection(e, item.id)} 
-            className="text-4xl font-black text-slate-800 uppercase tracking-tighter"
+            className={`${language === 'AR' ? 'text-right' : 'text-left'} text-4xl font-black text-slate-800 uppercase tracking-tighter`}
           >
             {item.label}
           </a>
@@ -152,7 +154,7 @@ const Navbar: React.FC<NavbarProps> = ({
         
         <button 
           onClick={() => { if(onAdminClick) onAdminClick(); setIsMenuOpen(false); }} 
-          className="text-right text-4xl font-black text-slate-800 uppercase tracking-tighter"
+          className={`${language === 'AR' ? 'text-right' : 'text-left'} text-4xl font-black text-slate-800 uppercase tracking-tighter`}
         >
           {language === 'AR' ? 'الإدارة' : 'Dashboard'}
         </button>
@@ -165,13 +167,4 @@ const Navbar: React.FC<NavbarProps> = ({
             {language === 'AR' ? 'سجل الآن' : 'Register Now'}
           </button>
           
-          <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
-            Makerlab &copy; 2024
-          </p>
-        </div>
-      </div>
-    </nav>
-  );
-};
-
-export default Navbar;
+          <p className="text-

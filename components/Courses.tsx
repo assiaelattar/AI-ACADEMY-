@@ -5,18 +5,18 @@ import { Course } from './data';
 interface CoursesProps {
   onCourseSelect: (courseId: string) => void;
   courses: Course[];
+  language?: 'AR' | 'EN';
 }
 
-const Courses: React.FC<CoursesProps> = ({ onCourseSelect, courses }) => {
+const Courses: React.FC<CoursesProps> = ({ onCourseSelect, courses, language = 'AR' }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
       const scrollAmount = 400; 
-      const isRtl = document.dir === 'rtl';
+      const isRtl = language === 'AR';
       
       let finalDirection = direction;
-      // In RTL, "left" scroll means positive and "right" means negative
       if (isRtl) {
         finalDirection = direction === 'left' ? 'right' : 'left';
       }
@@ -42,12 +42,18 @@ const Courses: React.FC<CoursesProps> = ({ onCourseSelect, courses }) => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-2xl">
+          <div className={`max-w-2xl ${language === 'AR' ? 'text-right' : 'text-left'}`}>
             <h2 className="text-4xl md:text-7xl font-black text-white mb-6 leading-none uppercase">
-              البرامج <span className="text-transparent bg-clip-text bg-gradient-to-l from-cyan-400 to-blue-500">التعليمية</span>
+              {language === 'AR' ? (
+                <>البرامج <span className="text-transparent bg-clip-text bg-gradient-to-l from-cyan-400 to-blue-500">التعليمية</span></>
+              ) : (
+                <>LEARNING <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">PROGRAMS</span></>
+              )}
             </h2>
             <p className="text-lg text-slate-400 font-medium">
-              تعليم مكثف يركز على المشاريع، مصمم لمؤسسي الغد. اختر مسارك التقني في مختبر الابتكار الخاص بنا.
+              {language === 'AR' 
+                ? 'تعليم مكثف يركز على المشاريع، مصمم لمؤسسي الغد. اختر مسارك التقني في مختبر الابتكار الخاص بنا.'
+                : 'Intensive project-focused education designed for the founders of tomorrow. Choose your technical path in our Innovation Foundry.'}
             </p>
           </div>
           
@@ -57,14 +63,14 @@ const Courses: React.FC<CoursesProps> = ({ onCourseSelect, courses }) => {
               className="w-14 h-14 rounded-full border border-slate-800 flex items-center justify-center text-white hover:bg-cyan-600 hover:border-cyan-600 transition-all duration-300 active:scale-95"
               aria-label="Previous"
             >
-              <ChevronRight size={24} />
+              {language === 'AR' ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}
             </button>
             <button 
               onClick={() => scroll('left')}
               className="w-14 h-14 rounded-full border border-slate-800 flex items-center justify-center text-white hover:bg-cyan-600 hover:border-cyan-600 transition-all duration-300 active:scale-95"
               aria-label="Next"
             >
-              <ChevronLeft size={24} />
+              {language === 'AR' ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
             </button>
           </div>
         </div>
@@ -83,35 +89,37 @@ const Courses: React.FC<CoursesProps> = ({ onCourseSelect, courses }) => {
                 <div className="absolute inset-0 bg-slate-950/40 z-10 group-hover:bg-transparent transition-colors duration-500"></div>
                 <img 
                   src={course.image} 
-                  alt={course.title} 
+                  alt={language === 'AR' ? course.title : course.titleEn} 
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out filter grayscale group-hover:grayscale-0" 
                 />
                 <div className="absolute top-6 right-6 z-20 flex flex-wrap gap-2">
                   <span className="px-5 py-2 bg-cyan-500 text-slate-900 text-[10px] font-black rounded-full uppercase">
-                    {course.tags[0]}
+                    {language === 'AR' ? course.tags[0] : course.tagsEn[0]}
                   </span>
                 </div>
               </div>
 
-              <div className="p-10 flex flex-col flex-grow">
-                <div className="flex items-center justify-between mb-4 text-slate-500 text-[11px] font-black uppercase">
+              <div className={`p-10 flex flex-col flex-grow ${language === 'AR' ? 'text-right' : 'text-left'}`}>
+                <div className={`flex items-center justify-between mb-4 text-slate-500 text-[11px] font-black uppercase ${language === 'AR' ? 'flex-row' : 'flex-row-reverse'}`}>
                   <div className="flex items-center gap-2">
                     <Clock size={16} className="text-cyan-400" />
-                    {course.duration}
+                    {language === 'AR' ? course.duration : course.durationEn}
                   </div>
                   <div className="flex items-center gap-1.5 text-slate-300">
-                    {course.ageGroup}
+                    {language === 'AR' ? course.ageGroup : course.ageGroupEn}
                   </div>
                 </div>
                 
-                <h3 className="text-2xl font-black text-white mb-4 group-hover:text-cyan-400 transition-colors uppercase leading-tight">{course.title}</h3>
+                <h3 className="text-2xl font-black text-white mb-4 group-hover:text-cyan-400 transition-colors uppercase leading-tight">
+                  {language === 'AR' ? course.title : course.titleEn}
+                </h3>
                 <p className="text-slate-400 text-sm mb-10 line-clamp-3 leading-relaxed flex-grow font-medium">
-                  {course.description}
+                  {language === 'AR' ? course.description : course.descriptionEn}
                 </p>
 
                 <div className="w-full py-5 rounded-2xl bg-slate-800 text-white font-black text-xs uppercase group-hover:bg-cyan-600 transition-all duration-300 flex items-center justify-center gap-3 mt-auto">
-                  استكشف تفاصيل البرنامج
-                  <ArrowLeft size={18} className="opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                  {language === 'AR' ? 'استكشف تفاصيل البرنامج' : 'Explore Program Details'}
+                  <ArrowLeft size={18} className={`opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ${language === 'EN' ? 'rotate-180' : ''}`} />
                 </div>
               </div>
             </div>

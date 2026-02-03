@@ -9,29 +9,42 @@ export interface Testimonial {
 
 export interface LearningOutcome {
   title: string;
+  titleEn: string;
   description: string;
+  descriptionEn: string;
 }
 
 export interface Session {
   date: string;
+  dateEn: string;
   time: string;
+  timeEn: string;
   status: 'Open' | 'Filling Fast' | 'Waitlist';
   statusAr: string;
+  statusEn: string;
 }
 
 export interface Course {
   id: string;
   title: string;
+  titleEn: string;
   subtitle: string;
+  subtitleEn: string;
   image: string;
   tags: string[];
+  tagsEn: string[];
   description: string;
+  descriptionEn: string;
   rating: string;
   duration: string;
+  durationEn: string;
   ageGroup: string;
+  ageGroupEn: string;
   price: string;
   schedule: string;
+  scheduleEn: string;
   features: string[];
+  featuresEn: string[];
   learningOutcomes: LearningOutcome[];
   testimonials: Testimonial[];
   sessions: Session[];
@@ -46,6 +59,10 @@ export interface SiteSettings {
   heroTitleEn: string;
   heroDescription: string;
   heroDescriptionEn: string;
+  heroImage: string;
+  businessImage: string;
+  buildablesAr: string[];
+  buildablesEn: string[];
 }
 
 export interface Partner {
@@ -58,10 +75,14 @@ export interface Partner {
 export interface PortfolioProject {
   id: string;
   title: string;
+  titleEn: string;
   client: string;
+  clientEn: string;
   category: string;
+  categoryEn: string;
   image: string;
   description: string;
+  descriptionEn: string;
 }
 
 export interface Enrollment {
@@ -92,80 +113,95 @@ export const initialCourses: Course[] = [
   {
     id: "7-day-build-camp",
     title: "مخيم بناء الذكاء الاصطناعي (7 أيام)",
+    titleEn: "AI Build Camp (7 Days)",
     subtitle: "من الفكرة إلى منتج SaaS جاهز",
+    subtitleEn: "From Idea to Ready SaaS Product",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop", 
     tags: ["مكثف", "مؤسسون", "SaaS"],
+    tagsEn: ["Intensive", "Founders", "SaaS"],
     description: "انتقل من مجرد فكرة إلى نموذج أولي وظيفي لخدمة برمجية مدعومة بالذكاء الاصطناعي في أسبوع واحد فقط. تعلم هندسة الذكاء الاصطناعي وتكامل التطبيقات.",
+    descriptionEn: "Go from just an idea to a functional prototype for an AI-powered software service in just one week. Learn AI engineering and app integration.",
     rating: "5.0",
     duration: "7 أيام",
+    durationEn: "7 Days",
     ageGroup: "للكبار والشغوفين",
+    ageGroupEn: "Adults & Enthusiasts",
     price: "4900",
     schedule: "يومياً 9:00 ص - 6:00 م",
-    features: [
-      "تصميم هندسة الذكاء الاصطناعي",
-      "تكامل واجهات برمجة التطبيقات ونماذج LLM",
-      "بناء حلول بدون كود للنمو السريع",
-      "يوم العرض والتقديم للمستثمرين"
-    ],
+    scheduleEn: "Daily 9:00 AM - 6:00 PM",
+    features: ["تصميم هندسة الذكاء الاصطناعي", "تكامل LLM", "بدون كود"],
+    featuresEn: ["AI Architecture", "LLM Integration", "No-Code Build"],
     learningOutcomes: [
-      { title: "أساسيات نماذج اللغة", description: "إتقان هندسة الأوامر (Prompt Engineering) ومفاهيم الضبط الدقيق ومعماريات RAG." },
-      { title: "تقنيات SaaS", description: "البناء باستخدام Next.js و Tailwind و Supabase للنشر السريع." },
-      { title: "إتقان الـ API", description: "الاتصال بنماذج OpenAI و Anthropic ونقاط النهاية المتخصصة." },
-      { title: "إطلاق المنتج", description: "تعلم كيفية النشر على Vercel وإعداد Stripe لتحقيق الأرباح." }
+      { 
+        title: "أساسيات نماذج اللغة", 
+        titleEn: "Language Model Basics",
+        description: "إتقان هندسة الأوامر (Prompt Engineering) ومعماريات RAG.",
+        descriptionEn: "Mastering Prompt Engineering and RAG architectures."
+      },
+      { 
+        title: "تقنيات SaaS", 
+        titleEn: "SaaS Technologies",
+        description: "البناء باستخدام Next.js و Tailwind و Supabase.",
+        descriptionEn: "Building with Next.js, Tailwind, and Supabase."
+      }
     ],
     testimonials: [
-      { name: "سامي منصوري", role: "مؤسس شركة ناشئة", quote: "بنيت مشروعي في 6 أيام. التركيز على التنفيذ الفعلي بدلاً من النظريات هو بالضبط ما يحتاجه التعليم التقني.", avatar: "https://i.pravatar.cc/150?u=sami" },
-      { name: "ياسمين العلوي", role: "مديرة منتج", quote: "فهمت أخيراً كيف يمكن دمج الذكاء الاصطناعي في سير عملنا الحالي. تدريب مكثف بنتائج مذهلة.", avatar: "https://i.pravatar.cc/150?u=yasmine" }
+      { name: "سامي", role: "مؤسس", quote: "بنيت مشروعي في 6 أيام.", avatar: "https://i.pravatar.cc/150?u=sami" }
     ],
     sessions: [
-      { date: "12 أكتوبر - 18 أكتوبر", time: "09:00 - 18:00", status: "Filling Fast", statusAr: "المقاعد محدودة" },
-      { date: "05 نوفمبر - 11 نوفمبر", time: "09:00 - 18:00", status: "Open", statusAr: "متاح" }
+      { date: "12 أكتوبر - 18 أكتوبر", dateEn: "Oct 12 - Oct 18", time: "09:00 - 18:00", timeEn: "9 AM - 6 PM", status: "Filling Fast", statusAr: "المقاعد محدودة", statusEn: "Filling Fast" },
+      { date: "05 نوفمبر - 11 نوفمبر", dateEn: "Nov 05 - Nov 11", time: "09:00 - 18:00", timeEn: "9 AM - 6 PM", status: "Open", statusAr: "متاح", statusEn: "Open" }
     ]
   },
   {
     id: "innovators-path",
     title: "مسار المبتكرين في الذكاء الاصطناعي",
+    titleEn: "AI Innovators Path",
     subtitle: "برمج، ابدع، تحكم",
+    subtitleEn: "Code, Create, Control",
     image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1200&auto=format&fit=crop", 
     tags: ["صناع", "برمجة", "إبداع"],
+    tagsEn: ["Makers", "Coding", "Creative"],
     description: "مسار مصمم خصيصاً لأي شخص لديه شغف بالبناء. تعلم كيف تحول أفكارك إلى حقيقة باستخدام قوة الذكاء الاصطناعي في صناعة الأفلام والبحث العميق.",
+    descriptionEn: "A track specially designed for anyone with a passion for building. Learn how to turn your ideas into reality using the power of AI in filmmaking and deep search.",
     rating: "4.9",
     duration: "4 أسابيع",
+    durationEn: "4 Weeks",
     ageGroup: "جميع الأعمار الشغوفة",
+    ageGroupEn: "All Passionate Ages",
     price: "2500",
     schedule: "الثلاثاء والخميس، 4:00 م",
-    features: [
-      "البرمجة المنطقية والذكاء الاصطناعي",
-      "توليد الصور والفنون الرقمية",
-      "أساسيات تطوير المنتجات",
-      "بناء حلول لمشاكل حقيقية"
-    ],
+    scheduleEn: "Tue & Thu, 4:00 PM",
+    features: ["البرمجة المنطقية", "توليد الصور والفنون", "تطوير المنتجات"],
+    featuresEn: ["Logic Programming", "Art Generation", "Product Development"],
     learningOutcomes: [
-      { title: "التفكير التصميمي", description: "تفكيك المشكلات المعقدة إلى خطوات صغيرة قابلة للحل باستخدام التكنولوجيا." },
-      { title: "إبداع المحتوى الذكي", description: "استخدام أدوات الإنشاء الذكية بأمان للتعبير عن الأفكار المبتكرة." },
-      { title: "البرمجة كأداة بناء", description: "تعلم البرمجة ليس كهدف، بل كأداة لصناعة كل ما تتخيله." },
-      { title: "العمل الجماعي التقني", description: "التعاون مع مبتكرين آخرين لحل تحديات ملموسة." }
+      { 
+        title: "التفكير التصميمي", 
+        titleEn: "Design Thinking",
+        description: "تفكيك المشكلات المعقدة إلى خطوات صغيرة.",
+        descriptionEn: "Breaking down complex problems into small steps."
+      }
     ],
-    testimonials: [
-      { name: "عمر ك.", role: "مصمم حر", quote: "البرمجة كانت تبدو صعبة، لكن هنا تعلمت أنها مجرد وسيلة لتحقيق شغفي.", avatar: "https://i.pravatar.cc/150?u=omar" },
-      { name: "سارة ب.", role: "مبتكرة", quote: "صناعة أدوات الذكاء الاصطناعي الخاصة بي كانت الجزء المفضل لدي. أي شخص شغوف يمكنه القيام بذلك!", avatar: "https://i.pravatar.cc/150?u=sarah" }
-    ],
+    testimonials: [],
     sessions: [
-      { date: "15 أكتوبر - 12 نوفمبر", time: "16:00 - 17:30", status: "Waitlist", statusAr: "قائمة الانتظار" },
-      { date: "20 نوفمبر - 18 ديسمبر", time: "16:00 - 17:30", status: "Open", statusAr: "متاح" }
+      { date: "15 أكتوبر - 12 نوفمبر", dateEn: "Oct 15 - Nov 12", time: "16:00 - 17:30", timeEn: "4:00 PM - 5:30 PM", status: "Waitlist", statusAr: "قائمة الانتظار", statusEn: "Waitlist" }
     ]
   }
 ];
 
 export const initialSiteSettings: SiteSettings = {
-  academyName: "أكاديمية الصناع الذكية",
-  academyNameEn: "Maker Intelligence Academy",
-  contactEmail: "contact@makerlab.ma",
+  academyName: "أكاديمية الذكاء الاصطناعي",
+  academyNameEn: "AI Academy",
+  contactEmail: "contact@ai-academy.ma",
   whatsappNumber: "+212 600 000 000",
   heroTitle: "مع الذكاء الاصطناعي، يمكنك أن تبني المستحيل",
   heroTitleEn: "With AI, You Can Build Anything",
   heroDescription: "تحول من مجرد مستخدم إلى صانع حقيقي. نحن نوفر لك الأدوات والبيئة لتطوير حلول ذكية، أفلام، وأنظمة برمجية متكاملة بضغطة زر واحدة.",
-  heroDescriptionEn: "Transform from a user to a true maker. We provide the tools and environment to develop smart solutions, films, and integrated software systems with one click."
+  heroDescriptionEn: "Transform from a user to a true maker. We provide the tools and environment to develop smart solutions, films, and integrated software systems with one click.",
+  heroImage: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=1200&auto=format&fit=crop",
+  businessImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200",
+  buildablesAr: ["تطبيق SaaS متكامل", "فيلماً سينمائياً", "نظام ERP ذكي", "موقعاً عالمياً", "لعبة تفاعلية", "حملة إعلانية", "تطبيق جوال"],
+  buildablesEn: ["Full SaaS App", "Cinematic Film", "Smart ERP System", "Global Website", "Interactive Game", "Ad Campaign", "Mobile App"]
 };
 
 export const initialPartners: Partner[] = [
@@ -179,17 +215,25 @@ export const initialPortfolio: PortfolioProject[] = [
   {
     id: 'p1',
     title: 'نظام إدارة التعليم الذكي',
+    titleEn: 'Smart LMS System',
     client: 'مجموعة مدارس النخبة',
+    clientEn: 'Elite Schools Group',
     category: 'Data Science',
+    categoryEn: 'Data Science',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800', 
-    description: 'منصة متكاملة لأتمتة المهام الإدارية وتخصيص تجربة التعلم لكل طالب باستخدام خوارزميات تحليل البيانات المتقدمة.'
+    description: 'منصة متكاملة لأتمتة المهام الإدارية وتخصيص تجربة التعلم لكل طالب باستخدام خوارزميات تحليل البيانات المتقدمة.',
+    descriptionEn: 'An integrated platform for automating administrative tasks and customizing the learning experience for each student using advanced data analysis algorithms.'
   },
   {
     id: 'p2',
     title: 'مساعد الإنتاج السينمائي الآلي',
+    titleEn: 'Automated Film Assistant',
     client: 'استوديو إبداع',
+    clientEn: 'Creativity Studio',
     category: 'AI Film Production',
+    categoryEn: 'AI Film Production',
     image: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=800', 
-    description: 'بوت ذكي يساعد المخرجين في جدولة المشاهد وتحليل السيناريو وتوقع احتياجات الإضاءة باستخدام البحث العميق.'
+    description: 'بوت ذكي يساعد المخرجين في جدولة المشاهد وتحليل السيناريو وتوقع احتياجات الإضاءة باستخدام البحث العميق.',
+    descriptionEn: 'A smart bot helping directors schedule scenes, analyze scripts, and predict lighting needs using deep search.'
   }
 ];

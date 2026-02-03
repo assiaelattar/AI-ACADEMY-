@@ -79,23 +79,6 @@ export default function App() {
     setEnrollments(prev => [newEnrollment, ...prev]);
   };
 
-  const handleBrochureRequest = (courseId: string, fullName: string, email: string, phone: string) => {
-    const course = courses.find(c => c.id === courseId);
-    if (!course) return;
-
-    const newRequest: BrochureRequest = {
-      id: Math.random().toString(36).substr(2, 9),
-      courseId,
-      courseTitle: course.title,
-      fullName,
-      email,
-      phone,
-      date: new Date().toISOString()
-    };
-
-    setBrochureRequests(prev => [newRequest, ...prev]);
-  };
-
   const handleAdminLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (passwordInput === 'admin123') {
@@ -117,20 +100,28 @@ export default function App() {
              <Logo size={120} showText dark className="items-center" siteSettings={siteSettings} language={language} />
           </div>
           <form onSubmit={handleAdminLogin} className="bg-slate-900 p-10 rounded-[2.5rem] shadow-2xl border border-slate-800 max-w-md w-full animate-in fade-in zoom-in-95 duration-500">
-            <h2 className="text-2xl font-black text-white mb-2 text-center uppercase tracking-tight">الدخول للوحة التحكم</h2>
-            <p className="text-slate-400 text-center text-sm mb-8 font-medium">يرجى إدخال كلمة المرور الإدارية.</p>
+            <h2 className="text-2xl font-black text-white mb-2 text-center uppercase tracking-tight">
+              {language === 'AR' ? 'الدخول للوحة التحكم' : 'Admin Login'}
+            </h2>
+            <p className="text-slate-400 text-center text-sm mb-8 font-medium">
+              {language === 'AR' ? 'يرجى إدخال كلمة المرور الإدارية.' : 'Please enter the administrative password.'}
+            </p>
             <div className="space-y-4">
               <input 
                 type="password" 
-                placeholder="كلمة المرور" 
+                placeholder={language === 'AR' ? 'كلمة المرور' : 'Password'}
                 className={`w-full p-4 rounded-2xl border bg-slate-800 text-white transition-all focus:outline-none focus:ring-2 text-center ${loginError ? 'border-rose-500 focus:ring-rose-500/20' : 'border-slate-700 focus:border-cyan-500 focus:ring-cyan-500/20'}`}
                 value={passwordInput}
                 onChange={(e) => { setPasswordInput(e.target.value); setLoginError(false); }}
                 required 
               />
-              <button className="w-full bg-cyan-500 text-slate-900 py-4 rounded-2xl font-black uppercase hover:bg-cyan-400 transition-all">فتح اللوحة</button>
+              <button className="w-full bg-cyan-500 text-slate-900 py-4 rounded-2xl font-black uppercase hover:bg-cyan-400 transition-all">
+                {language === 'AR' ? 'فتح اللوحة' : 'Open Dashboard'}
+              </button>
             </div>
-            <button type="button" onClick={handleNavigateHome} className="w-full mt-8 text-slate-500 text-xs font-black uppercase hover:text-white transition-colors">العودة للموقع</button>
+            <button type="button" onClick={handleNavigateHome} className="w-full mt-8 text-slate-500 text-xs font-black uppercase hover:text-white transition-colors">
+              {language === 'AR' ? 'العودة للموقع' : 'Back to Website'}
+            </button>
           </form>
         </div>
       );
@@ -167,7 +158,7 @@ export default function App() {
       />
       <main>
         {view === 'course-detail' && selectedCourseData ? (
-          <CourseDetail course={selectedCourseData} onBack={handleNavigateHome} onEnroll={handleEnroll} onBrochureRequest={handleBrochureRequest} />
+          <CourseDetail course={selectedCourseData} language={language} onBack={handleNavigateHome} onEnroll={handleEnroll} />
         ) : (
           <>
             <Hero siteSettings={siteSettings} language={language} onRegisterClick={() => setIsRegistrationOpen(true)} />
@@ -186,18 +177,18 @@ export default function App() {
                </div>
             </section>
 
-            <Features />
-            <Courses courses={courses} onCourseSelect={handleCourseSelect} />
+            <Features language={language} />
+            <Courses courses={courses} language={language} onCourseSelect={handleCourseSelect} />
 
             {/* Business Solutions Section */}
             <section id="business" className="py-32 bg-white overflow-hidden">
-              <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                 <div className="space-y-8">
+              <div className={`max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center ${language === 'AR' ? '' : 'lg:flex-row-reverse'}`}>
+                 <div className={`space-y-8 ${language === 'AR' ? 'text-right' : 'text-left'}`}>
                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-[11px] font-black uppercase">
                      <Building2 size={14} className="text-cyan-400" /> {language === 'AR' ? 'حلول للأعمال والشركات' : 'Business Solutions'}
                    </div>
                    <h2 className="text-5xl md:text-7xl font-black text-slate-900 leading-none">
-                     {language === 'AR' ? <>ابنِ منتج <span className="text-transparent bg-clip-text bg-gradient-to-l from-cyan-600 to-blue-600">SaaS</span> الخاص بشركتك</> : <>Build Your Own <span className="text-transparent bg-clip-text bg-gradient-to-l from-cyan-600 to-blue-600">SaaS</span> Product</>}
+                     {language === 'AR' ? <>ابنِ منتج <span className="text-transparent bg-clip-text bg-gradient-to-l from-cyan-600 to-blue-600">SaaS</span> الخاص بشركتك</> : <>Build Your Own <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600">SaaS</span> Product</>}
                    </h2>
                    <p className="text-xl text-slate-500 font-medium leading-relaxed">
                      {language === 'AR' 
@@ -209,7 +200,7 @@ export default function App() {
                        ? ['تطوير منتجات SaaS مخصصة', 'أتمتة العمليات بالذكاء الاصطناعي', 'بناء وكلاء دعم مخصصين']
                        : ['Custom SaaS Development', 'AI Workflow Automation', 'Custom Support Agents']
                      ).map(item => (
-                       <div key={item} className="flex items-center gap-3 font-bold text-slate-700">
+                       <div key={item} className={`flex items-center gap-3 font-bold text-slate-700 ${language === 'AR' ? '' : 'flex-row-reverse'}`}>
                          <div className="w-6 h-6 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-600"><Rocket size={14} /></div>
                          {item}
                        </div>
@@ -217,16 +208,16 @@ export default function App() {
                    </div>
                    <button 
                     onClick={() => setIsRegistrationOpen(true)}
-                    className="px-10 py-5 bg-slate-900 text-white rounded-2xl font-black uppercase hover:bg-cyan-600 transition-all shadow-xl shadow-slate-900/10 flex items-center gap-4 active:scale-95"
+                    className={`px-10 py-5 bg-slate-900 text-white rounded-2xl font-black uppercase hover:bg-cyan-600 transition-all shadow-xl shadow-slate-900/10 flex items-center gap-4 active:scale-95 ${language === 'AR' ? 'flex-row' : 'flex-row-reverse'}`}
                    >
                      {language === 'AR' ? 'ابدأ مشروعك معنا' : 'Start Your Project'} <ChevronLeft size={20} className={language === 'EN' ? 'rotate-180' : ''}/>
                    </button>
                  </div>
                  <div className="relative">
                    <div className="w-full aspect-square bg-slate-100 rounded-[4rem] overflow-hidden rotate-3">
-                     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200" className="w-full h-full object-cover" />
+                     <img src={siteSettings.businessImage} className="w-full h-full object-cover" />
                    </div>
-                   <div className="absolute -bottom-10 -left-10 p-8 bg-white shadow-2xl rounded-[2.5rem] border border-slate-100 animate-float">
+                   <div className={`absolute -bottom-10 ${language === 'AR' ? '-left-10' : '-right-10'} p-8 bg-white shadow-2xl rounded-[2.5rem] border border-slate-100 animate-float`}>
                       <p className="text-cyan-600 font-black text-4xl leading-none">٩٨٪</p>
                       <p className="text-slate-400 text-[10px] font-black uppercase mt-1">{language === 'AR' ? 'نسبة رضا العملاء' : 'Customer Satisfaction'}</p>
                    </div>
@@ -245,14 +236,16 @@ export default function App() {
                     {portfolio.map(project => (
                       <div key={project.id} className="group bg-white rounded-[3.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-700">
                         <div className="h-80 overflow-hidden relative">
-                           <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                           <div className="absolute top-8 right-8 px-5 py-2 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-black uppercase text-slate-900">{project.category}</div>
+                           <img src={project.image} alt={language === 'AR' ? project.title : project.titleEn} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                           <div className={`absolute top-8 ${language === 'AR' ? 'right-8' : 'left-8'} px-5 py-2 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-black uppercase text-slate-900`}>
+                             {language === 'AR' ? project.category : project.categoryEn}
+                           </div>
                         </div>
-                        <div className="p-12">
-                           <p className="text-cyan-500 font-black text-xs uppercase mb-2">{project.client}</p>
-                           <h4 className="text-3xl font-black uppercase mb-4">{project.title}</h4>
-                           <p className="text-slate-500 font-medium leading-relaxed mb-8">{project.description}</p>
-                           <button className="flex items-center gap-3 text-slate-900 font-black uppercase text-xs hover:text-cyan-600 transition-colors">
+                        <div className={`p-12 ${language === 'AR' ? 'text-right' : 'text-left'}`}>
+                           <p className="text-cyan-500 font-black text-xs uppercase mb-2">{language === 'AR' ? project.client : project.clientEn}</p>
+                           <h4 className="text-3xl font-black uppercase mb-4">{language === 'AR' ? project.title : project.titleEn}</h4>
+                           <p className="text-slate-500 font-medium leading-relaxed mb-8">{language === 'AR' ? project.description : project.descriptionEn}</p>
+                           <button className={`flex items-center gap-3 text-slate-900 font-black uppercase text-xs hover:text-cyan-600 transition-colors ${language === 'AR' ? 'flex-row' : 'flex-row-reverse'}`}>
                              {language === 'AR' ? 'عرض دراسة الحالة' : 'View Case Study'} <ChevronLeft size={16} className={language === 'EN' ? 'rotate-180' : ''}/>
                            </button>
                         </div>
@@ -264,7 +257,7 @@ export default function App() {
           </>
         )}
       </main>
-      <Footer siteSettings={siteSettings} />
+      <Footer siteSettings={siteSettings} language={language} />
 
       {/* Global Registration Modal */}
       {isRegistrationOpen && (
@@ -276,7 +269,7 @@ export default function App() {
             >
               <X size={20} />
             </button>
-            <div className="text-center mb-8">
+            <div className={`text-center mb-8 ${language === 'AR' ? '' : 'text-left'}`}>
               <h2 className="text-3xl font-black uppercase tracking-tighter mb-2">
                 {language === 'AR' ? 'انضم لمختبر الصناع' : 'Join The Maker Foundry'}
               </h2>
@@ -287,17 +280,17 @@ export default function App() {
             
             <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsRegistrationOpen(false); alert(language === 'AR' ? 'تم التسجيل بنجاح!' : 'Successfully Registered!'); }}>
                <div className="space-y-1">
-                 <label className="text-[10px] font-black uppercase text-slate-400">{language === 'AR' ? 'الاسم الكامل' : 'Full Name'}</label>
-                 <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 text-sm font-bold" />
+                 <label className={`text-[10px] font-black uppercase text-slate-400 block ${language === 'AR' ? 'text-right' : 'text-left'}`}>{language === 'AR' ? 'الاسم الكامل' : 'Full Name'}</label>
+                 <input required type="text" className={`w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 text-sm font-bold ${language === 'AR' ? 'text-right' : 'text-left'}`} />
                </div>
                <div className="space-y-1">
-                 <label className="text-[10px] font-black uppercase text-slate-400">{language === 'AR' ? 'البريد الإلكتروني' : 'Email Address'}</label>
-                 <input required type="email" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 text-sm font-bold" />
+                 <label className={`text-[10px] font-black uppercase text-slate-400 block ${language === 'AR' ? 'text-right' : 'text-left'}`}>{language === 'AR' ? 'البريد الإلكتروني' : 'Email Address'}</label>
+                 <input required type="email" className={`w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 text-sm font-bold ${language === 'AR' ? 'text-right' : 'text-left'}`} />
                </div>
                <div className="space-y-1">
-                 <label className="text-[10px] font-black uppercase text-slate-400">{language === 'AR' ? 'البرنامج المفضل' : 'Preferred Program'}</label>
-                 <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 text-sm font-bold appearance-none">
-                    {courses.map(c => <option key={c.id} value={c.id}>{c.title}</option>)}
+                 <label className={`text-[10px] font-black uppercase text-slate-400 block ${language === 'AR' ? 'text-right' : 'text-left'}`}>{language === 'AR' ? 'البرنامج المفضل' : 'Preferred Program'}</label>
+                 <select className={`w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 text-sm font-bold appearance-none ${language === 'AR' ? 'text-right' : 'text-left'}`}>
+                    {courses.map(c => <option key={c.id} value={c.id}>{language === 'AR' ? c.title : c.titleEn}</option>)}
                     <option value="business">{language === 'AR' ? 'حلول للأعمال' : 'Business Solutions'}</option>
                  </select>
                </div>

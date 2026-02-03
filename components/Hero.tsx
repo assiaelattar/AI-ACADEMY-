@@ -9,33 +9,18 @@ interface HeroProps {
   onRegisterClick?: () => void;
 }
 
-const buildablesAr = [
-  "تطبيق SaaS متكامل",
-  "فيلماً سينمائياً",
-  "نظام ERP ذكي",
-  "موقعاً عالمياً",
-  "لعبة تفاعلية",
-  "حملة إعلانية",
-  "تطبيق جوال"
-];
-
-const buildablesEn = [
-  "Full SaaS App",
-  "Cinematic Film",
-  "Smart ERP System",
-  "Global Website",
-  "Interactive Game",
-  "Ad Campaign",
-  "Mobile App"
-];
-
 const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) => {
   const [offset, setOffset] = useState(0);
   const [buildIndex, setBuildIndex] = useState(0);
   const [fade, setFade] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const buildables = language === 'AR' ? buildablesAr : buildablesEn;
+  const buildables = language === 'AR' 
+    ? (siteSettings.buildablesAr || []) 
+    : (siteSettings.buildablesEn || []);
+
+  const heroTitle = language === 'AR' ? siteSettings.heroTitle : siteSettings.heroTitleEn;
+  const heroDescription = language === 'AR' ? siteSettings.heroDescription : siteSettings.heroDescriptionEn;
 
   useEffect(() => {
     let animationFrameId: number;
@@ -48,6 +33,7 @@ const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) 
   }, []);
 
   useEffect(() => {
+    if (buildables.length === 0) return;
     const interval = setInterval(() => {
       setFade(false);
       setTimeout(() => {
@@ -106,16 +92,21 @@ const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) 
             
             <div className="space-y-4">
               <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black leading-[1.05] tracking-tighter text-slate-900">
-                {language === 'AR' ? <>مع الذكاء الاصطناعي،<br />يمكنك أن تبني <br /></> : <>With AI,<br />You Can Build <br /></>}
-                <span className={`inline-block transition-all duration-500 transform ${fade ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'} text-transparent bg-clip-text bg-gradient-to-l from-cyan-500 via-blue-600 to-indigo-600 min-h-[1.2em]`}>
-                  {buildables[buildIndex]}
-                </span>
+                {heroTitle}<br />
+                {buildables.length > 0 && (
+                  <>
+                    <span className="text-slate-400 block md:inline">{language === 'AR' ? 'يمكنك بناء ' : 'You can build '}</span>
+                    <span className={`inline-block transition-all duration-500 transform ${fade ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'} text-transparent bg-clip-text bg-gradient-to-l from-cyan-500 via-blue-600 to-indigo-600 min-h-[1.2em]`}>
+                      {buildables[buildIndex]}
+                    </span>
+                  </>
+                )}
               </h1>
             </div>
           </div>
           
           <p className="text-xl text-slate-500 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
-            {language === 'AR' ? siteSettings.heroDescription : siteSettings.heroDescriptionEn}
+            {heroDescription}
           </p>
           
           <div className={`flex flex-col sm:flex-row gap-6 justify-center ${language === 'AR' ? 'lg:justify-start' : 'lg:justify-end'} pt-4`}>
@@ -152,7 +143,7 @@ const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) 
           <div className="relative w-72 h-96 md:w-80 md:h-[480px] z-20 group">
              <div className="w-full h-full rounded-[3.5rem] overflow-hidden shadow-2xl border-[12px] border-white bg-slate-100 transform rotate-[3deg] group-hover:rotate-0 transition-transform duration-1000">
                 <img 
-                  src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=1200&auto=format&fit=crop" 
+                  src={siteSettings.heroImage} 
                   alt="AI Maker Space" 
                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
