@@ -90,7 +90,7 @@ export const initialCourses: Course[] = [
     id: "7-day-build-camp",
     title: "مخيم بناء الذكاء الاصطناعي (7 أيام)",
     subtitle: "من الفكرة إلى منتج SaaS جاهز",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop", // AI App/SaaS Visual
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop", 
     tags: ["مكثف", "مؤسسون", "SaaS"],
     description: "انتقل من مجرد فكرة إلى نموذج أولي وظيفي لخدمة برمجية مدعومة بالذكاء الاصطناعي في أسبوع واحد فقط. تعلم هندسة الذكاء الاصطناعي وتكامل التطبيقات.",
     rating: "5.0",
@@ -123,7 +123,7 @@ export const initialCourses: Course[] = [
     id: "innovators-path",
     title: "مسار المبتكرين في الذكاء الاصطناعي",
     subtitle: "برمج، ابدع، تحكم",
-    image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1200&auto=format&fit=crop", // Film/Creative Production Visual
+    image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1200&auto=format&fit=crop", 
     tags: ["صناع", "برمجة", "إبداع"],
     description: "مسار مصمم خصيصاً لأي شخص لديه شغف بالبناء. تعلم كيف تحول أفكارك إلى حقيقة باستخدام قوة الذكاء الاصطناعي في صناعة الأفلام والبحث العميق.",
     rating: "4.9",
@@ -158,8 +158,8 @@ export const initialSiteSettings: SiteSettings = {
   academyName: "أكاديمية الصناع الذكية",
   contactEmail: "contact@makerlab.ma",
   whatsappNumber: "+212 600 000 000",
-  heroTitle: "أي شخص بشغف يمكنه أن يكون صانعاً بالذكاء الاصطناعي",
-  heroDescription: "لا حدود للإبداع. نحن نوفر لك الأدوات والبيئة لتتحول من مجرد مستخدم للتكنولوجيا إلى صانع ومبتكر يحل مشكلات العالم الحقيقي عبر البحث العميق وتحليل البيانات."
+  heroTitle: "مع الذكاء الاصطناعي، يمكنك أن تبني المستحيل",
+  heroDescription: "تحول من مجرد مستخدم إلى صانع حقيقي. نحن نوفر لك الأدوات والبيئة لتطوير حلول ذكية، أفلام، وأنظمة برمجية متكاملة بضغطة زر واحدة."
 };
 
 export const initialPartners: Partner[] = [
@@ -175,7 +175,7 @@ export const initialPortfolio: PortfolioProject[] = [
     title: 'نظام إدارة التعليم الذكي',
     client: 'مجموعة مدارس النخبة',
     category: 'Data Science',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800', // Data Science Visual
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800', 
     description: 'منصة متكاملة لأتمتة المهام الإدارية وتخصيص تجربة التعلم لكل طالب باستخدام خوارزميات تحليل البيانات المتقدمة.'
   },
   {
@@ -183,7 +183,7 @@ export const initialPortfolio: PortfolioProject[] = [
     title: 'مساعد الإنتاج السينمائي الآلي',
     client: 'استوديو إبداع',
     category: 'AI Film Production',
-    image: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=800', // Film/Video Visual
+    image: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=800', 
     description: 'بوت ذكي يساعد المخرجين في جدولة المشاهد وتحليل السيناريو وتوقع احتياجات الإضاءة باستخدام البحث العميق.'
   }
 ];
