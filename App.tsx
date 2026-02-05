@@ -10,9 +10,9 @@ import Logo from './components/Logo';
 import { 
   initialCourses, Course, Enrollment, BrochureRequest, 
   SiteSettings, initialSiteSettings, Partner, PortfolioProject,
-  initialPartners, initialPortfolio 
+  initialPartners, initialPortfolio, masteredTools 
 } from './components/data';
-import { Building2, Rocket, Briefcase, Layout, ChevronLeft, X, CheckCircle, Loader2 } from 'lucide-react';
+import { Building2, Rocket, Briefcase, Layout, ChevronLeft, X, CheckCircle, Loader2, Sparkles, Code, Globe, Zap, Bot, Terminal, Cpu, Database, Github, Layers } from 'lucide-react';
 
 type ViewState = 'home' | 'course-detail' | 'admin';
 
@@ -33,7 +33,6 @@ export default function App() {
   const [partners, setPartners] = useState<Partner[]>(initialPartners);
   const [portfolio, setPortfolio] = useState<PortfolioProject[]>(initialPortfolio);
 
-  // Sync document direction
   useEffect(() => {
     document.dir = language === 'AR' ? 'rtl' : 'ltr';
     document.documentElement.lang = language === 'AR' ? 'ar' : 'en';
@@ -68,7 +67,7 @@ export default function App() {
       courseId,
       courseTitle: course.title,
       studentName,
-      parentName: 'Parent',
+      parentName: 'Founder',
       email,
       age: 25,
       mode,
@@ -178,6 +177,94 @@ export default function App() {
             </section>
 
             <Features language={language} />
+
+            {/* Tools You Will Master Section */}
+            <section className="py-24 bg-white overflow-hidden border-b border-slate-100">
+              <div className="max-w-7xl mx-auto px-6">
+                <div className="text-center mb-16 space-y-4">
+                  <h2 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.4em]">
+                    {language === 'AR' ? 'ترسانتك التقنية' : 'YOUR TECH STACK'}
+                  </h2>
+                  <h3 className="text-4xl md:text-6xl font-black text-slate-900 leading-none">
+                    {language === 'AR' ? <>أدوات <span className="text-cyan-500">ستتقنها</span> في المختبر</> : <>Tools You Will <span className="text-cyan-500">Master</span> In The Lab</>}
+                  </h3>
+                </div>
+
+                <div className="relative group">
+                   <div className="flex animate-marquee gap-8 md:gap-12 py-10">
+                      {[...masteredTools, ...masteredTools].map((tool, i) => (
+                        <div key={i} className="flex-shrink-0 flex flex-col items-center justify-center p-8 md:p-12 bg-slate-50 border border-slate-100 rounded-[2.5rem] md:rounded-[3rem] w-[200px] md:w-[280px] group/item hover:bg-slate-950 hover:text-white transition-all duration-500 hover:-translate-y-4">
+                           <span className="text-xl md:text-3xl font-black uppercase mb-2 text-center leading-none">{tool.name}</span>
+                           <span className="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest">{tool.category}</span>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+              </div>
+            </section>
+
+            {/* The Lab Process Section */}
+            <section className="py-24 md:py-32 bg-slate-950 overflow-hidden">
+              <div className="max-w-7xl mx-auto px-6">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center">
+                   <div className="lg:col-span-5 space-y-8">
+                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500 rounded-full text-slate-950 text-[11px] font-black uppercase">
+                        {language === 'AR' ? 'رحلة الصناع' : 'The Makers Journey'}
+                      </div>
+                      <h2 className="text-4xl md:text-7xl font-black text-white leading-[1.1]">
+                        {language === 'AR' ? <>كيف نحول <span className="text-slate-500">الخيال</span> إلى واقع؟</> : <>How We Turn <span className="text-slate-500">Imagination</span> Into Reality?</>}
+                      </h2>
+                      <p className="text-lg text-slate-400 font-medium leading-relaxed">
+                        {language === 'AR' 
+                          ? 'نتبع منهجية الابتكار السريع. يبدأ الطلاب بفهم احتياج حقيقي، ثم يشرعون في بناء وتجريب حلولهم الذكية.'
+                          : 'We follow a rapid innovation methodology. Students start by understanding a real need, then set out to build and test their smart solutions.'}
+                      </p>
+                      
+                      <div className="space-y-6">
+                        {[
+                          { icon: <Bot size={20}/>, title: language === 'AR' ? 'التفكير التصميمي' : 'Design Thinking', desc: language === 'AR' ? 'تحديد المشكلة وحلولها الممكنة' : 'Define problem & potential solutions' },
+                          { icon: <Code size={20}/>, title: language === 'AR' ? 'البناء التقني' : 'Technical Build', desc: language === 'AR' ? 'برمجة الحلول باستخدام أحدث الأدوات' : 'Coding solutions with latest tools' },
+                          { icon: <Rocket size={20}/>, title: language === 'AR' ? 'الإطلاق والنشر' : 'Launch & Deploy', desc: language === 'AR' ? 'عرض المشروع للعالم' : 'Show project to the world' }
+                        ].map((step, i) => (
+                          <div key={i} className={`flex gap-4 ${language === 'AR' ? 'text-right' : 'text-left'}`}>
+                            <div className="w-10 h-10 md:w-12 md:h-12 bg-slate-900 rounded-xl flex items-center justify-center text-cyan-500 flex-shrink-0">
+                               {step.icon}
+                            </div>
+                            <div>
+                               <h4 className="text-white font-black text-sm md:text-base uppercase tracking-tight">{step.title}</h4>
+                               <p className="text-slate-500 text-xs md:text-sm font-medium">{step.desc}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                   </div>
+                   
+                   <div className="lg:col-span-7 relative">
+                      <div className="grid grid-cols-2 gap-4 md:gap-6 transform rotate-3 scale-95 md:scale-100">
+                        <div className="space-y-4 md:space-y-6">
+                           <div className="aspect-[4/5] bg-slate-900 rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-slate-800">
+                              <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=600" className="w-full h-full object-cover grayscale opacity-50" />
+                           </div>
+                           <div className="aspect-square bg-cyan-600 rounded-[2rem] md:rounded-[3rem] flex flex-col items-center justify-center p-6 text-center text-slate-950">
+                              <Sparkles size={48} className="mb-4" />
+                              <span className="font-black text-xl md:text-3xl uppercase leading-none">{language === 'AR' ? 'إبداع بلا حدود' : 'Limitless Creativity'}</span>
+                           </div>
+                        </div>
+                        <div className="space-y-4 md:space-y-6 pt-12">
+                           <div className="aspect-square bg-white rounded-[2rem] md:rounded-[3rem] flex flex-col items-center justify-center p-6 text-center text-slate-950">
+                              <Zap size={48} className="text-indigo-600 mb-4" />
+                              <span className="font-black text-xl md:text-3xl uppercase leading-none">{language === 'AR' ? 'تطور سريع' : 'Fast Growth'}</span>
+                           </div>
+                           <div className="aspect-[4/5] bg-slate-900 rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-slate-800">
+                              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600" className="w-full h-full object-cover grayscale opacity-50" />
+                           </div>
+                        </div>
+                      </div>
+                   </div>
+                </div>
+              </div>
+            </section>
+
             <Courses courses={courses} language={language} onCourseSelect={handleCourseSelect} />
 
             {/* Business Solutions Section */}

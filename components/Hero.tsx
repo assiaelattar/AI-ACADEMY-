@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, Code, Terminal, Zap, Cpu, Sparkles, Building2, Layers, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Code, Terminal, Zap, Cpu, Sparkles, Building2, Layers, CheckCircle, Rocket, Bot, ShieldCheck } from 'lucide-react';
 import TechSticker from './TechSticker';
 import { SiteSettings } from './data';
 
@@ -51,55 +51,46 @@ const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) 
   };
 
   return (
-    <div ref={containerRef} className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center items-center pt-24 md:pt-32 bg-slate-50 pb-16 md:pb-24">
+    <div ref={containerRef} className="relative min-h-[90vh] md:min-h-screen w-full overflow-hidden flex flex-col justify-center items-center pt-28 md:pt-32 bg-slate-50 pb-16 md:pb-24">
       
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-cyan-100 rounded-full blur-[80px] md:blur-[120px] animate-blob"></div>
-        <div className="absolute bottom-0 left-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-indigo-100 rounded-full blur-[80px] md:blur-[120px] animate-blob animation-delay-4000"></div>
+      {/* Immersive Background Elements */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] right-[-10%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-gradient-to-br from-cyan-100/30 to-indigo-100/30 rounded-full blur-[80px] md:blur-[150px] animate-blob"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-gradient-to-tr from-slate-200 to-blue-100/30 rounded-full blur-[80px] md:blur-[150px] animate-blob animation-delay-4000"></div>
       </div>
 
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ 
-        backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', 
-        backgroundSize: '30px 30px' 
+      <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none" style={{ 
+        backgroundImage: 'radial-gradient(#000 0.5px, transparent 0.5px)', 
+        backgroundSize: '24px 24px' 
       }}></div>
 
-      {/* Floating Text Path - Hidden on smallest screens for clarity */}
-      <div className="absolute inset-0 z-10 pointer-events-none select-none hidden sm:block">
-        <svg className="w-full h-full" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
-          <path
-            id="curve-path"
-            d="M -100,600 C 300,600 400,200 720,200 C 1040,200 1140,600 1540,600"
-            fill="transparent"
-            stroke="none"
-          />
-          <text className="text-4xl md:text-6xl lg:text-8xl font-black uppercase fill-slate-900/[0.03]" dir="ltr">
-            <textPath href="#curve-path" startOffset={`${-offset}%`}>
-              BUILD • CREATE • INNOVATE • BUILD • CREATE • INNOVATE • BUILD • CREATE •
-            </textPath>
-          </text>
-        </svg>
-      </div>
-
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         
-        <div className={`lg:col-span-7 text-center ${language === 'AR' ? 'lg:text-right' : 'lg:text-left'} space-y-8 md:space-y-10`}>
+        {/* Left Content Column */}
+        <div className={`lg:col-span-7 text-center ${language === 'AR' ? 'lg:text-right' : 'lg:text-left'} space-y-8 md:space-y-12`}>
           <div className={`flex flex-col ${language === 'AR' ? 'lg:items-start' : 'lg:items-end'} gap-3 md:gap-4`}>
-            <div className={`inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-cyan-200 bg-white/80 backdrop-blur-sm text-[10px] md:text-[11px] font-black uppercase text-cyan-600 shadow-sm self-center ${language === 'AR' ? 'lg:self-start' : 'lg:self-end'}`}>
-              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-cyan-500 animate-pulse"></span>
-              {language === 'AR' ? 'مختبر الابتكار والذكاء الاصطناعي' : 'AI & Innovation Foundry'}
+            <div className={`group inline-flex items-center gap-3 px-4 py-2 rounded-full border border-slate-200 bg-white shadow-sm self-center ${language === 'AR' ? 'lg:self-start' : 'lg:self-end'} hover:border-slate-900 transition-colors`}>
+              <div className="flex -space-x-2 rtl:space-x-reverse">
+                {[1,2,3].map(i => (
+                  <img key={i} src={`https://i.pravatar.cc/100?u=founder${i}`} className="w-6 h-6 rounded-full border-2 border-white" alt="Avatar" />
+                ))}
+              </div>
+              <span className="text-[10px] md:text-[11px] font-black uppercase text-slate-900 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-900 animate-pulse"></span>
+                {language === 'AR' ? 'مختبر الابتكار نشط الآن' : 'Founders Lab Active Now'}
+              </span>
             </div>
             
-            <div className="space-y-3 md:space-y-4">
-              <h1 className="text-4xl md:text-6xl lg:text-[6.5rem] font-black leading-[1.1] tracking-tighter text-slate-900">
+            <div className="space-y-4 md:space-y-6">
+              <h1 className="text-4xl md:text-7xl lg:text-[7rem] font-black leading-[1] tracking-tighter text-slate-950">
                 {heroTitle}<br />
                 {buildables.length > 0 && (
-                  <>
-                    <span className="text-slate-400 block md:inline">{language === 'AR' ? 'يمكنك بناء ' : 'You can build '}</span>
-                    <span className={`inline-block transition-all duration-500 transform ${fade ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'} text-transparent bg-clip-text bg-gradient-to-l from-cyan-500 via-blue-600 to-indigo-600 min-h-[1.2em]`}>
+                  <div className="mt-2 md:mt-4">
+                    <span className="text-slate-300 block md:inline text-3xl md:text-6xl">{language === 'AR' ? 'ابنِ ' : 'Build '}</span>
+                    <span className={`inline-block transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform ${fade ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'} text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-800 to-slate-950 min-h-[1.1em]`}>
                       {buildables[buildIndex]}
                     </span>
-                  </>
+                  </div>
                 )}
               </h1>
             </div>
@@ -109,92 +100,106 @@ const Hero: React.FC<HeroProps> = ({ siteSettings, language, onRegisterClick }) 
             {heroDescription}
           </p>
           
-          <div className={`flex flex-col sm:flex-row gap-4 md:gap-6 justify-center ${language === 'AR' ? 'lg:justify-start' : 'lg:justify-end'} pt-2 md:pt-4`}>
+          <div className={`flex flex-col sm:flex-row gap-4 md:gap-6 justify-center ${language === 'AR' ? 'lg:justify-start' : 'lg:justify-end'} pt-4`}>
             <button 
               onClick={onRegisterClick}
-              className="group relative px-8 py-5 md:px-12 md:py-6 bg-slate-900 text-white rounded-2xl md:rounded-[2.5rem] font-black text-xs md:text-sm uppercase overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-xl md:shadow-2xl shadow-slate-900/20"
+              className="group relative px-10 py-5 md:px-14 md:py-6 bg-slate-950 text-white rounded-2xl md:rounded-[2rem] font-black text-xs md:text-sm uppercase overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-slate-900/20"
             >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                {language === 'AR' ? 'ابدأ رحلة البناء الآن' : 'Start Building Now'} 
-                <ArrowLeft className={`w-4 h-4 group-hover:-translate-x-1 transition-transform ${language === 'EN' ? 'rotate-180' : ''}`} />
+              <span className="relative z-10 flex items-center justify-center gap-3">
+                {language === 'AR' ? 'ابدأ البناء الآن' : 'Start Building Now'} 
+                <Rocket className={`w-4 h-4 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform`} />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-l from-cyan-500 to-blue-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-800 to-slate-950 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
             </button>
             
             <button 
               onClick={handlePortfolioClick}
-              className="flex items-center justify-center gap-4 px-6 py-4 md:px-8 md:py-5 bg-white border-2 border-slate-100 rounded-2xl md:rounded-[2.5rem] shadow-sm hover:border-cyan-500 transition-all active:scale-95"
+              className="flex items-center justify-center gap-4 px-8 py-5 md:px-10 md:py-6 bg-white border-2 border-slate-100 rounded-2xl md:rounded-[2rem] shadow-sm hover:border-slate-950 transition-all active:scale-95"
             >
-              <div className="flex -space-x-3 rtl:space-x-reverse">
-                {[1,2,3].map(i => (
-                  <img key={i} src={`https://i.pravatar.cc/100?u=maker${i}`} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white" alt="Maker" />
-                ))}
-              </div>
-              <div className="flex flex-col items-start leading-none">
-                <span className="font-black text-slate-900 text-xs md:text-sm">+١,٢٠٠</span>
-                <span className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase mt-1">{language === 'AR' ? 'صانع نشط' : 'Active Makers'}</span>
-              </div>
+               <span className="font-black text-slate-900 text-xs md:text-sm uppercase">{language === 'AR' ? 'شاهد النماذج' : 'View Prototypes'}</span>
+               <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-slate-900 transition-colors">
+                  <ArrowLeft className={`w-5 h-5 ${language === 'EN' ? 'rotate-180' : ''}`} />
+               </div>
             </button>
           </div>
         </div>
 
-        <div className="lg:col-span-5 relative h-[400px] md:h-[600px] w-full flex items-center justify-center">
-          {/* Main Showcase Image */}
-          <div className="relative w-56 h-72 md:w-80 md:h-[480px] z-20 group">
-             <div className="w-full h-full rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-[8px] md:border-[12px] border-white bg-slate-100 transform rotate-[3deg] group-hover:rotate-0 transition-transform duration-1000">
+        {/* Right Media Column */}
+        <div className="lg:col-span-5 relative h-[450px] md:h-[700px] w-full flex items-center justify-center">
+          
+          {/* Main Visual Frame */}
+          <div className="relative w-[90%] h-[90%] z-20 group">
+             {/* Decorative Background Frame */}
+             <div className="absolute inset-0 border-[1.5px] border-slate-200 rounded-[3rem] md:rounded-[4rem] rotate-[-2deg] group-hover:rotate-0 transition-transform duration-1000 scale-105"></div>
+             
+             {/* Image Container */}
+             <div className="w-full h-full rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] border-8 md:border-[12px] border-white bg-white transform rotate-[1deg] group-hover:rotate-0 transition-transform duration-1000">
                 <img 
                   src={siteSettings.heroImage} 
-                  alt="AI Maker Space" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
+                  alt="Founder working on AI" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 grayscale hover:grayscale-0"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex items-end p-6 md:p-10">
-                  <div className={`text-white w-full ${language === 'AR' ? 'text-right' : 'text-left'}`}>
-                    <p className="font-black text-xl md:text-2xl leading-none uppercase tracking-tight">{language === 'AR' ? 'مختبر المستقبل' : 'Future Foundry'}</p>
-                    <div className={`flex items-center gap-2 mt-2 md:mt-3 ${language === 'AR' ? 'justify-end' : 'justify-start'}`}>
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                      <p className="text-[9px] md:text-[10px] font-bold uppercase opacity-80">{language === 'AR' ? 'بناء نشط الآن' : 'Active Build Now'}</p>
-                    </div>
-                  </div>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
              </div>
           </div>
 
-          {/* Floaters - Hidden on small mobile to avoid clutter */}
-          <div className="hidden sm:block">
-            <TechSticker className="absolute top-[5%] left-[-5%] md:left-[0%] z-30 animate-float">
-               <div className="px-4 py-3 md:px-6 md:py-4 bg-white/90 backdrop-blur-xl rounded-2xl md:rounded-[2rem] flex items-center gap-3 shadow-2xl border border-cyan-100 -rotate-6">
-                  <div className="p-1.5 md:p-2 bg-cyan-500 rounded-lg md:rounded-xl text-white">
-                    <Terminal size={16} />
+          {/* Floaters - Professional elements */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* AI Prompt Sticker */}
+            <TechSticker className="absolute top-[12%] left-[-12%] md:left-[-10%] z-30 animate-float">
+               <div className="px-5 py-3 md:px-8 md:py-5 bg-white/95 backdrop-blur-xl rounded-xl md:rounded-2xl flex items-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 rotate-[-4deg]">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-slate-950 rounded-xl flex items-center justify-center text-white">
+                    <Terminal size={20} />
                   </div>
-                  <div className="flex flex-col items-start">
-                    <span className="text-[8px] md:text-[9px] font-black text-slate-400 uppercase">Input</span>
-                    <span className="font-black text-xs text-slate-900">Idea.generate()</span>
-                  </div>
-               </div>
-            </TechSticker>
-
-            <TechSticker className="absolute bottom-[20%] right-[-10%] md:right-[-5%] z-30 animate-float-delayed">
-               <div className="p-4 md:p-6 bg-slate-900 text-white rounded-[2rem] md:rounded-[2.5rem] shadow-2xl border border-slate-700 rotate-12 group hover:rotate-0 transition-transform">
-                  <div className="flex items-center gap-3 md:gap-4">
-                     <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-xl md:rounded-2xl flex items-center justify-center">
-                        <Zap className="text-white" size={20} />
-                     </div>
-                     <div className="flex flex-col items-start">
-                        <span className="text-[9px] md:text-[10px] font-bold text-cyan-400 uppercase">Deploy Rate</span>
-                        <span className="font-black text-base md:text-lg">١٠٠٪ نجاح</span>
-                     </div>
+                  <div className="flex flex-col items-start leading-tight">
+                    <span className="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest">Deploy Status</span>
+                    <span className="font-black text-xs md:text-sm text-slate-900">{language === 'AR' ? 'نظام حي...' : 'Production Live...'}</span>
                   </div>
                </div>
             </TechSticker>
 
-            <TechSticker className="absolute top-[15%] right-[5%] md:right-[10%] z-30 animate-float" style={{ animationDelay: '2s' }}>
-              <div className="w-12 h-12 md:w-14 md:h-14 bg-white rounded-xl md:rounded-2xl shadow-xl flex items-center justify-center text-indigo-600 border border-slate-100 rotate-12">
-                <Sparkles size={20} />
+            {/* Achievement Sticker */}
+            <TechSticker className="absolute bottom-[15%] right-[-10%] md:right-[-5%] z-30 animate-float-delayed">
+               <div className="px-6 py-4 md:px-10 md:py-7 bg-slate-950 text-white rounded-3xl md:rounded-[3rem] shadow-2xl border border-slate-800 rotate-[4deg]">
+                  <div className="flex items-center gap-4">
+                     <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-slate-800 rounded-2xl flex items-center justify-center">
+                        <Cpu className="text-white" size={24} />
+                     </div>
+                     <div className="flex flex-col items-start leading-tight">
+                        <span className="text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-widest">Tech Stack</span>
+                        <span className="font-black text-lg md:text-2xl uppercase">{language === 'AR' ? 'نظام مؤسسي' : 'Enterprise RAG'}</span>
+                     </div>
+                  </div>
+               </div>
+            </TechSticker>
+
+            {/* Sparkle Sticker */}
+            <TechSticker className="absolute top-[20%] right-[-8%] z-30 animate-float" style={{ animationDelay: '2s' }}>
+              <div className="w-14 h-14 md:w-20 md:h-20 bg-white rounded-3xl shadow-xl flex items-center justify-center text-slate-950 border border-slate-50 rotate-12">
+                <ShieldCheck size={28} />
               </div>
             </TechSticker>
           </div>
         </div>
       </div>
+
+      {/* Hero Marquee */}
+      <div className="absolute bottom-6 md:bottom-12 w-full overflow-hidden whitespace-nowrap opacity-[0.05] pointer-events-none">
+        <div className="flex animate-marquee text-4xl md:text-6xl font-black uppercase tracking-tighter text-slate-950">
+          <span className="mx-8">SaaS • AI Agents • RAG • Automation • LLMs • Founders • SaaS • AI Agents • RAG • Automation • </span>
+          <span className="mx-8">SaaS • AI Agents • RAG • Automation • LLMs • Founders • SaaS • AI Agents • RAG • Automation • </span>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 40s linear infinite;
+        }
+      `}</style>
     </div>
   );
 };
