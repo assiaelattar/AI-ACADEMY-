@@ -58,6 +58,19 @@
         66% { transform: translate(-20px, 20px) scale(0.9); }
         100% { transform: translate(0px, 0px) scale(1); }
       }
+
+      @keyframes marquee-fast {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .animate-marquee-fast {
+        animation: marquee-fast 25s linear infinite;
+      }
+
+      [dir="rtl"] .animate-marquee-fast {
+        animation: marquee-fast 25s linear infinite reverse;
+      }
       
       .animate-float {
         animation: float 10s ease-in-out infinite;

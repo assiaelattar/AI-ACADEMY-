@@ -12,7 +12,12 @@ import {
   SiteSettings, initialSiteSettings, Partner, PortfolioProject,
   initialPartners, initialPortfolio, masteredTools 
 } from './components/data';
-import { Building2, Rocket, Briefcase, Layout, ChevronLeft, X, CheckCircle, Loader2, Sparkles, Code, Globe, Zap, Bot, Terminal, Cpu, Database, Github, Layers } from 'lucide-react';
+import { 
+  Building2, Rocket, Briefcase, Layout, ChevronLeft, X, 
+  CheckCircle, Loader2, Sparkles, Code, Globe, Zap, Bot, 
+  Terminal, Cpu, Database, Github, Layers, ArrowUpRight, 
+  Plus, Video, Mic2, MessageSquare
+} from 'lucide-react';
 
 type ViewState = 'home' | 'course-detail' | 'admin';
 
@@ -91,6 +96,26 @@ export default function App() {
 
   const selectedCourseData = selectedCourseId ? courses.find(c => c.id === selectedCourseId) : null;
 
+  // Helper to map tool to icon
+  const getToolIcon = (name: string) => {
+    const iconSize = 18;
+    switch(name.toLowerCase()) {
+      case 'gemini': return <Bot size={iconSize} />;
+      case 'klingai': return <Video size={iconSize} />;
+      case 'claude code': return <Code size={iconSize} />;
+      case 'veo 3': return <Zap size={iconSize} />;
+      case 'antigravity': return <Layers size={iconSize} />;
+      case 'google ai studio': return <Cpu size={iconSize} />;
+      case 'nano banana pro': return <Zap size={iconSize} />;
+      case 'seedream': return <Mic2 size={iconSize} />;
+      case 'remotion': return <Terminal size={iconSize} />;
+      case 'firebase': return <Database size={iconSize} />;
+      case 'github': return <Github size={iconSize} />;
+      case 'highfield': return <Globe size={iconSize} />;
+      default: return <Sparkles size={iconSize} />;
+    }
+  };
+
   if (view === 'admin') {
     if (!isAdminLoggedIn) {
       return (
@@ -162,46 +187,50 @@ export default function App() {
           <>
             <Hero siteSettings={siteSettings} language={language} onRegisterClick={() => setIsRegistrationOpen(true)} />
             
-            {/* Partners Marquee */}
-            <section className="py-12 bg-white border-y border-slate-100 overflow-hidden">
-               <div className="max-w-7xl mx-auto px-6">
-                 <p className="text-center text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-8">
-                   {language === 'AR' ? 'شركاء النجاح في مختبر الابتكار' : 'Innovation Partners & Supporters'}
-                 </p>
-                 <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60">
-                   {partners.map(p => (
-                     <img key={p.id} src={p.logo} alt={p.name} className="h-8 md:h-12 grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer" />
-                   ))}
-                 </div>
+            {/* Tech Stack Sleek Marquee - New Redesign */}
+            <div className="bg-white py-12 border-b border-slate-100 relative z-40 overflow-hidden">
+               <div className="max-w-7xl mx-auto px-6 mb-8 flex items-center justify-between">
+                  <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
+                     {language === 'AR' ? 'الترسانة التقنية للمختبر' : 'FOUNDRY TECH STACK'}
+                  </h3>
+                  <div className="h-px flex-1 mx-8 bg-slate-100 hidden md:block"></div>
+                  <div className="flex items-center gap-2 text-cyan-500">
+                    <Sparkles size={14} />
+                    <span className="text-[9px] font-black uppercase tracking-widest">{language === 'AR' ? 'أدوات الجيل القادم' : 'NEXT-GEN AI'}</span>
+                  </div>
+               </div>
+
+               <div className="relative">
+                  {/* Fade Overlays */}
+                  <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
+                  <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
+                  
+                  <div className="flex animate-marquee-fast gap-6 md:gap-10">
+                     {[...masteredTools, ...masteredTools, ...masteredTools].map((tool, i) => (
+                       <div key={i} className="flex-shrink-0 flex items-center gap-4 px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl group hover:bg-slate-950 hover:text-white hover:border-slate-900 transition-all duration-300">
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${tool.featured ? 'bg-cyan-500 text-slate-950' : 'bg-slate-200 text-slate-600 group-hover:bg-slate-800 group-hover:text-cyan-400'}`}>
+                             {getToolIcon(tool.name)}
+                          </div>
+                          <div className="flex flex-col">
+                             <span className="text-xs md:text-sm font-black uppercase leading-none">{tool.name}</span>
+                             <span className="text-[8px] font-bold text-slate-400 uppercase tracking-tighter mt-1 group-hover:text-slate-500">{tool.category}</span>
+                          </div>
+                       </div>
+                     ))}
+                  </div>
+               </div>
+            </div>
+            
+            {/* Partners Bar */}
+            <section className="py-10 bg-slate-50 overflow-hidden border-b border-slate-100">
+               <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 hover:opacity-100 transition-opacity duration-500">
+                 {partners.map(p => (
+                   <img key={p.id} src={p.logo} alt={p.name} className="h-6 md:h-8 grayscale object-contain" />
+                 ))}
                </div>
             </section>
 
             <Features language={language} />
-
-            {/* Tools You Will Master Section */}
-            <section className="py-24 bg-white overflow-hidden border-b border-slate-100">
-              <div className="max-w-7xl mx-auto px-6">
-                <div className="text-center mb-16 space-y-4">
-                  <h2 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.4em]">
-                    {language === 'AR' ? 'ترسانتك التقنية' : 'YOUR TECH STACK'}
-                  </h2>
-                  <h3 className="text-4xl md:text-6xl font-black text-slate-900 leading-none">
-                    {language === 'AR' ? <>أدوات <span className="text-cyan-500">ستتقنها</span> في المختبر</> : <>Tools You Will <span className="text-cyan-500">Master</span> In The Lab</>}
-                  </h3>
-                </div>
-
-                <div className="relative group">
-                   <div className="flex animate-marquee gap-8 md:gap-12 py-10">
-                      {[...masteredTools, ...masteredTools].map((tool, i) => (
-                        <div key={i} className="flex-shrink-0 flex flex-col items-center justify-center p-8 md:p-12 bg-slate-50 border border-slate-100 rounded-[2.5rem] md:rounded-[3rem] w-[200px] md:w-[280px] group/item hover:bg-slate-950 hover:text-white transition-all duration-500 hover:-translate-y-4">
-                           <span className="text-xl md:text-3xl font-black uppercase mb-2 text-center leading-none">{tool.name}</span>
-                           <span className="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest">{tool.category}</span>
-                        </div>
-                      ))}
-                   </div>
-                </div>
-              </div>
-            </section>
 
             {/* The Lab Process Section */}
             <section className="py-24 md:py-32 bg-slate-950 overflow-hidden">

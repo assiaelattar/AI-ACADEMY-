@@ -90,7 +90,7 @@ export interface Enrollment {
   courseId: string;
   courseTitle: string;
   studentName: string;
-  parentName: string; // Internal name, but will label as "Full Name" in UI
+  parentName: string; 
   email: string;
   age: number;
   mode: 'campus' | 'online';
@@ -186,131 +186,6 @@ export const initialCourses: Course[] = [
     learningOutcomes: [],
     testimonials: [],
     sessions: []
-  },
-  {
-    id: "ai-business-strategist",
-    title: "إستراتيجية مشاريع الذكاء الاصطناعي",
-    titleEn: "AI Business Strategist",
-    subtitle: "إدارة شركات المستقبل",
-    subtitleEn: "Managing Future Companies",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop", 
-    tags: ["Business", "AI Strategy", "ROI"],
-    tagsEn: ["Business", "AI Strategy", "ROI"],
-    description: "كيف تطلق مشروعاً يعتمد كلياً على الذكاء الاصطناعي. من تحديد الفجوة في السوق إلى استخدام Google AI Studio للنمذجة السريعة.",
-    descriptionEn: "How to launch a business entirely powered by AI. From identifying market gaps to using Google AI Studio for rapid prototyping.",
-    rating: "5.0",
-    duration: "٦ أسابيع",
-    durationEn: "6 Weeks",
-    ageGroup: "للمدراء والتنفيذيين",
-    ageGroupEn: "Managers & Execs",
-    price: "5500",
-    schedule: "أونلاين",
-    scheduleEn: "Online",
-    features: ["نمذجة الأعمال AI", "دراسات جدوى", "إطلاق MVP"],
-    featuresEn: ["AI Business Modeling", "Feasibility Studies", "MVP Launch"],
-    learningOutcomes: [],
-    testimonials: [],
-    sessions: []
-  },
-  {
-    id: "intelligent-ecommerce-dev",
-    title: "تطوير المتاجر الإلكترونية الذكية",
-    titleEn: "Intelligent E-commerce Dev",
-    subtitle: "ثورة البيع بالتجزئة",
-    subtitleEn: "Retail Revolution",
-    image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200&auto=format&fit=crop", 
-    tags: ["E-commerce", "Conversion", "AI"],
-    tagsEn: ["E-commerce", "Conversion", "AI"],
-    description: "حول أي متجر إلكتروني عادي إلى محرك مبيعات ذكي. تعلم تخصيص تجربة العميل باستخدام Gemini و Nano Banana Pro.",
-    descriptionEn: "Turn any regular e-commerce store into a smart sales engine. Learn UX personalization using Gemini and Nano Banana Pro.",
-    rating: "4.8",
-    duration: "٥ أسابيع",
-    durationEn: "5 Weeks",
-    ageGroup: "لرياديي التجارة",
-    ageGroupEn: "E-com Pros",
-    price: "4200",
-    schedule: "مسائي",
-    scheduleEn: "Evenings",
-    features: ["توصيات AI", "تخصيص الواجهات", "أتمتة المخزون"],
-    featuresEn: ["AI Recommendations", "UI Personalization", "Inventory Automation"],
-    learningOutcomes: [],
-    testimonials: [],
-    sessions: []
-  },
-  {
-    id: "automation-architect-pro",
-    title: "مهندس أتمتة الأعمال (احترافي)",
-    titleEn: "Automation Architect Pro",
-    subtitle: "كفاءة مطلقة",
-    subtitleEn: "Absolute Efficiency",
-    image: "https://images.unsplash.com/photo-1518433278981-d1027883bc9e?q=80&w=1200&auto=format&fit=crop", 
-    tags: ["Automation", "No-Code", "Efficiency"],
-    tagsEn: ["Automation", "No-Code", "Efficiency"],
-    description: "صمم مسارات عمل ذاتية التشغيل بالكامل. اربط بين تطبيقاتك ووكلائك الذكيين لتعمل شركتك بينما أنت نائم.",
-    descriptionEn: "Design fully self-running workflows. Connect your apps and AI agents so your business runs while you sleep.",
-    rating: "4.9",
-    duration: "٤ أسابيع",
-    durationEn: "4 Weeks",
-    ageGroup: "للعمليات والإنتاجية",
-    ageGroupEn: "Operations & Ops",
-    price: "3900",
-    schedule: "مكثف",
-    scheduleEn: "Intensive",
-    features: ["أتمتة العمليات", "وكلاء مستقلين", "تقليل التكاليف"],
-    featuresEn: ["Workflow Automation", "Autonomous Agents", "Cost Reduction"],
-    learningOutcomes: [],
-    testimonials: [],
-    sessions: []
-  },
-  {
-    id: "enterprise-chatbot-eng",
-    title: "هندسة بوتات المحادثة للمؤسسات",
-    titleEn: "Enterprise Chatbot Engineering",
-    subtitle: "ذكاء المحادثة الفائق",
-    subtitleEn: "Supercharged Conversational AI",
-    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=1200&auto=format&fit=crop", 
-    tags: ["NLP", "Chatbots", "Gemini"],
-    tagsEn: ["NLP", "Chatbots", "Gemini"],
-    description: "طور بوتات محادثة بمستوى بشري لخدمة العملاء والمبيعات. تدريب مخصص على نماذج Gemini و Seedream.",
-    descriptionEn: "Develop human-level chatbots for customer service and sales. Custom training on Gemini and Seedream models.",
-    rating: "5.0",
-    duration: "٤ أسابيع",
-    durationEn: "4 Weeks",
-    ageGroup: "للمطورين",
-    ageGroupEn: "Developers",
-    price: "3200",
-    schedule: "نهاية الأسبوع",
-    scheduleEn: "Weekends",
-    features: ["تكامل WhatsApp", "تدريب RAG", "تحليل المشاعر"],
-    featuresEn: ["WhatsApp Integration", "RAG Training", "Sentiment Analysis"],
-    learningOutcomes: [],
-    testimonials: [],
-    sessions: []
-  },
-  {
-    id: "ai-mobile-foundry",
-    title: "مختبر تطبيقات الجوال الذكية",
-    titleEn: "AI Mobile App Foundry",
-    subtitle: "تطبيقات تفكر وتتفاعل",
-    subtitleEn: "Apps that Think & Interact",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1200&auto=format&fit=crop", 
-    tags: ["Mobile", "Flutter", "AI Apps"],
-    tagsEn: ["Mobile", "Flutter", "AI Apps"],
-    description: "ابنِ الجيل القادم من تطبيقات الجوال التي تدمج ميزات الرؤية الحاسوبية والذكاء الصوتي المتقدم.",
-    descriptionEn: "Build the next generation of mobile apps integrating computer vision and advanced voice intelligence features.",
-    rating: "4.8",
-    duration: "٨ أسابيع",
-    durationEn: "8 Weeks",
-    ageGroup: "للمصممين والمطورين",
-    ageGroupEn: "Designers & Devs",
-    price: "5900",
-    schedule: "أونلاين + حضوري",
-    scheduleEn: "Blended Learning",
-    features: ["برمجة Flutter", "واجهات ذكية", "تكامل API"],
-    featuresEn: ["Flutter Programming", "Intelligent UIs", "API Integration"],
-    learningOutcomes: [],
-    testimonials: [],
-    sessions: []
   }
 ];
 
@@ -325,45 +200,23 @@ export const initialSiteSettings: SiteSettings = {
   heroDescriptionEn: "We are the leading innovation lab turning developers and founders into leaders in the AI era. Intensive programs, real projects, and tangible results.",
   heroImage: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop",
   businessImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200",
-  buildablesAr: [
-    "فيديو UGC", 
-    "مؤثر ذكاء اصطناعي", 
-    "مشروع ذكاء اصطناعي", 
-    "موقع إلكتروني", 
-    "متجر إلكتروني", 
-    "تطبيقات ذكية", 
-    "أنظمة أتمتة", 
-    "تطبيق SaaS", 
-    "بوتات محادثة", 
-    "وأكثر..."
-  ],
-  buildablesEn: [
-    "UGC Video", 
-    "AI Influencer", 
-    "AI Business", 
-    "Website", 
-    "E-commerce", 
-    "Apps", 
-    "Automation", 
-    "SaaS App", 
-    "Chat Bots", 
-    "And More"
-  ]
+  buildablesAr: ["فيديو UGC", "مؤثر ذكاء اصطناعي", "مشروع ذكاء اصطناعي", "موقع إلكتروني", "متجر إلكتروني", "تطبيقات ذكية", "أنظمة أتمتة", "تطبيق SaaS", "بوتات محادثة", "وأكثر..."],
+  buildablesEn: ["UGC Video", "AI Influencer", "AI Business", "Website", "E-commerce", "Apps", "Automation", "SaaS App", "Chat Bots", "And More"]
 };
 
 export const masteredTools = [
-  { name: 'KlingAi', category: 'Video' },
-  { name: 'Veo 3', category: 'Video' },
-  { name: 'Antigravity', category: 'Consistency' },
-  { name: 'Google AI Studio', category: 'Models' },
-  { name: 'Nano Banana Pro', category: 'Advanced AI' },
-  { name: 'Seedream', category: 'Chat' },
-  { name: 'Gemini', category: 'Models' },
-  { name: 'Claude Code', category: 'Dev' },
-  { name: 'Remotion', category: 'Programmatic Video' },
-  { name: 'Firebase', category: 'Backend' },
-  { name: 'GitHub', category: 'Dev' },
-  { name: 'Highfield', category: 'Influencers' }
+  { name: 'Gemini', category: 'LLM Model', descAr: 'المحرك الأقوى للمنطق والتحليل', descEn: 'State-of-the-art Reasoning Engine', featured: true },
+  { name: 'KlingAi', category: 'UGC Video', descAr: 'توليد فيديو واقعي فائق الدقة', descEn: 'High-fidelity UGC Video Gen', featured: true },
+  { name: 'Claude Code', category: 'Dev Agent', descAr: 'مساعد البرمجة والترميز الذكي', descEn: 'Intelligent Coding Companion', featured: true },
+  { name: 'Veo 3', category: 'Cinematics', descAr: 'إخراج سينمائي بالذكاء الاصطناعي', descEn: 'Next-Gen Cinematic Motion' },
+  { name: 'Antigravity', category: 'Consistency', descAr: 'الحفاظ على ملامح الشخصية', descEn: 'Character Consistency System' },
+  { name: 'Google AI Studio', category: 'Ideation', descAr: 'بيئة تطوير النماذج الأولية', descEn: 'Rapid Prototyping Sandbox' },
+  { name: 'Nano Banana Pro', category: 'Optimization', descAr: 'نماذج صغيرة فائقة السرعة', descEn: 'Ultra-fast Lightweight Models' },
+  { name: 'Seedream', category: 'Speech', descAr: 'تحويل النص لصوت بشري', descEn: 'Human-like Voice Synthesis' },
+  { name: 'Remotion', category: 'Automation', descAr: 'برمجة الفيديو بالكود', descEn: 'Code-driven Video Production' },
+  { name: 'Firebase', category: 'Infrastructure', descAr: 'قواعد بيانات ونشر سحابي', descEn: 'Real-time Backend & Hosting' },
+  { name: 'GitHub', category: 'Version Control', descAr: 'إدارة الكود والتعاون البرمجي', descEn: 'Code Mgmt & CI/CD Pipelines' },
+  { name: 'Highfield', category: 'Social AI', descAr: 'إدارة المؤثرين الافتراضيين', descEn: 'Virtual Influencer Management' }
 ];
 
 export const initialPartners: Partner[] = [
@@ -385,17 +238,5 @@ export const initialPortfolio: PortfolioProject[] = [
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800', 
     description: 'منصة متكاملة لأتمتة المهام الإدارية وتخصيص تجربة التعلم لكل طالب باستخدام خوارزميات تحليل البيانات المتقدمة.',
     descriptionEn: 'An integrated platform for automating administrative tasks and customizing the learning experience for each student using advanced data analysis algorithms.'
-  },
-  {
-    id: 'p2',
-    title: 'مساعد الإنتاج السينمائي الآلي',
-    titleEn: 'Automated Film Assistant',
-    client: 'استوديو إبداع',
-    clientEn: 'Creativity Studio',
-    category: 'AI Film Production',
-    categoryEn: 'AI Film Production',
-    image: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=800', 
-    description: 'بوت ذكي يساعد المخرجين في جدولة المشاهد وتحليل السيناريو وتوقع احتياجات الإضاءة باستخدام البحث العميق.',
-    descriptionEn: 'A smart bot helping directors schedule scenes, analyze scripts, and predict lighting needs using deep search.'
   }
 ];
