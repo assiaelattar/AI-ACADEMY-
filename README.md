@@ -1,20 +1,37 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Future Makers
 
-# Run and deploy your AI Studio app
+French agency portfolio inspired by the visual direction of helloupdigital.com, adapted with original Future Makers copy and CSS artwork.
 
-This contains everything you need to run your app locally.
+## Run locally
 
-View your app in AI Studio: https://ai.studio/apps/drive/1zz3It21eRTTFE1CrUQ5pr14KG0ydCGRF
+Requires Node.js. No dependency installation is needed.
 
-## Run Locally
+```sh
+npm run dev
+```
 
-**Prerequisites:**  Node.js
+Open http://127.0.0.1:4173.
 
+## Build and deploy
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```sh
+npm run build
+npx vercel deploy --prod
+```
+
+Vercel configuration builds the site into `dist`. Sign in to the intended Vercel account before deployment.
+
+## Content
+
+- `index.html`: page structure, French copy, contact links.
+- `style.css`: responsive layout, original CSS planets and visual identity.
+- `app.js`: six services, seven projects with development status, team, portfolio filters, studio previews and dialogs.
+- Enquiries open the visitor's email application with `collab@makerlab.academy` as recipient. No message is submitted or stored by the website.
+- Studio examples are illustrative interface previews, not live generative AI tools.
+- Portfolio art is illustrative, not screenshots of the actual products.
+- Stats, team and project scope are based on the supplied Future Makers dossier. No third-party client logos or testimonials are used.
+- Fonts are loaded from Google Fonts with system fallbacks.
+
+## Verification
+
+Build and JavaScript syntax checks passed. Browser checks covered studio tab switching, portfolio category filtering, project dialogs, desktop layout, 390px mobile layout, navigation menu, horizontal overflow and console errors.
