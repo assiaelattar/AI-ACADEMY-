@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Future Makers — L’IA au cœur de votre entreprise</title>
+<meta name="description" content="Future Makers, agence IA à Casablanca : agents intelligents, écosystèmes connectés, studios créatifs et formation. La révolution IA est là — on la construit pour vous.">
+<meta name="theme-color" content="#060706">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,800;0,900;1,800&family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="is-loading">
+
+<!-- ============ PRELOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__grid"></div>
+  <div class="loader__inner">
+    <div class="loader__log" id="loaderLog"></div>
+    <div class="loader__count"><span id="loaderNum">000</span><i>%</i></div>
+    <div class="loader__bar"><span id="loaderBar"></span></div>
+    <div class="loader__foot"><span>FUTURE MAKERS / NEURAL BOOT</span><span>CASABLANCA — 33.57°N 7.59°W</span></div>
+  </div>
+</div>
+
+<!-- ============ CURSOR / FX ============ -->
+<div class="cursor" id="cursor"><span class="cursor__dot"></span><span class="cursor__ring"><em id="cursorLabel"></em></span></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a href="#top" class="logo" aria-label="Future Makers — accueil">
+    <span class="logo__mark">f</span>
+    <span class="logo__word">future<br>makers.</span>
+  </a>
+  <nav class="nav__links" aria-label="Navigation principale">
+    <a href="#expertises" data-scramble>Expertises</a>
+    <a href="#demo" data-scramble>Live agent</a>
+    <a href="#studio" data-scramble>AI Studio <b>NEW</b></a>
+    <a href="#projets" data-scramble>Projets</a>
+    <a href="#academie" data-scramble>Académie</a>
+    <a href="#collectif" data-scramble>Collectif</a>
+  </nav>
+  <div class="nav__right">
+    <span class="nav__status"><i></i><span id="agentsLive">12</span> agents actifs</span>
+    <a href="#contact" class="btn btn--sm btn--lime magnetic"><span>Démarrer un projet</span></a>
+    <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#expertises">Expertises</a><a href="#demo">Live agent</a><a href="#studio">AI Studio</a><a href="#projets">Projets</a><a href="#academie">Académie</a><a href="#collectif">Collectif</a><a href="#contact">Contact</a>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <canvas class="hero__gl" id="gl"></canvas>
+  <div class="hero__vignette"></div>
+
+  <div class="hero__content">
+    <p class="eyebrow reveal-up"><span class="pulse"></span>AGENCE IA · CASABLANCA · <span id="year">2026</span></p>
+    <h1 class="hero__title">
+      <span class="line"><span class="word">LA RÉVOLUTION</span></span>
+      <span class="line"><span class="word serif">est déjà là.</span></span>
+      <span class="line"><span class="word lime">ON LA CONSTRUIT</span></span>
+      <span class="line"><span class="word">POUR VOUS.</span></span>
+    </h1>
+    <div class="hero__bottom">
+      <p class="hero__lead reveal-up">Agents autonomes, écosystèmes connectés, studios créatifs et équipes formées. Nous transformons l’intelligence artificielle en <em>résultats concrets</em> pour votre entreprise.</p>
+      <div class="hero__ctas reveal-up">
+        <a href="#demo" class="btn btn--lime magnetic" data-cursor="Go"><span>Voir un agent penser</span><i>↘</i></a>
+        <a href="#projets" class="btn btn--ghost magnetic"><span>Nos réalisations</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__hud">
+    <div class="hud__cell"><span class="hud__k">MODE</span><span class="hud__v" id="hudMode">SPHÈRE NEURONALE</span></div>
+    <div class="hud__cell"><span class="hud__k">TOKENS / S</span><span class="hud__v" id="hudTps">0</span></div>
+    <div class="hud__cell"><span class="hud__k">HEURE LOCALE</span><span class="hud__v" id="hudClock">--:--:--</span></div>
+    <div class="hud__cell hud__scroll"><span class="hud__k">SCROLL</span><span class="hud__line"><i></i></span></div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>AGENTS IA <b>✳</b> VOICE AI <b>✳</b> CRM & ERP <b>✳</b> CREATIVE STUDIO <b>✳</b> FILMS IA <b>✳</b> FORMATION <b>✳</b> AUTOMATISATION <b>✳</b> BUILD THE FUTURE <b>✳</b></span>
+    <span>AGENTS IA <b>✳</b> VOICE AI <b>✳</b> CRM & ERP <b>✳</b> CREATIVE STUDIO <b>✳</b> FILMS IA <b>✳</b> FORMATION <b>✳</b> AUTOMATISATION <b>✳</b> BUILD THE FUTURE <b>✳</b></span>
+  </div>
+</div>
+
+<!-- ============ MANIFESTO ============ -->
+<section class="manifesto section" id="manifeste">
+  <div class="section__tag"><span>01</span> MANIFESTE</div>
+  <p class="manifesto__text" id="manifesto">Pendant que d’autres en parlent, nous construisons. Des agents qui répondent à 3h du matin. Des systèmes qui apprennent de chaque interaction. Des équipes qui maîtrisent enfin leurs outils. L’intelligence artificielle n’est plus une option : c’est votre prochain avantage compétitif.</p>
+  <div class="stats">
+    <div class="stat"><span class="stat__n" data-count="500" data-suffix="+">0</span><span class="stat__l">étudiants formés à l’IA</span></div>
+    <div class="stat"><span class="stat__n" data-count="20" data-suffix="+">0</span><span class="stat__l">projets développés</span></div>
+    <div class="stat"><span class="stat__n" data-count="2017">0</span><span class="stat__l">début de l’aventure</span></div>
+    <div class="stat"><span class="stat__n" data-count="6" data-pad="2">0</span><span class="stat__l">profils complémentaires</span></div>
+  </div>
+</section>
+
+<!-- ============ LIVE AGENT DEMO ============ -->
+<section class="demo section" id="demo">
+  <div class="section__head">
+    <div class="section__tag"><span>02</span> LIVE AGENT</div>
+    <h2 class="h2"><span class="split">VOYEZ UN AGENT</span><span class="split serif lime-ink">penser.</span></h2>
+    <p class="section__sub">Décrivez un besoin. Regardez notre agent l’analyser, choisir ses outils et assembler une solution, en temps réel.</p>
+  </div>
+
+  <div class="console" id="console">
+    <div class="console__bar">
+      <span class="dots"><i></i><i></i><i></i></span>
+      <span class="console__title">fm-agent://orchestrator — v4.2</span>
+      <span class="console__state" id="consoleState"><i></i>EN ATTENTE</span>
+    </div>
+    <div class="console__body">
+      <div class="console__left">
+        <div class="console__prompt">
+          <span class="caret">›</span>
+          <input id="agentInput" type="text" placeholder="Ex : je veux répondre à mes clients WhatsApp 24h/24…" autocomplete="off" aria-label="Décrivez votre besoin">
+          <button id="agentRun" class="btn btn--lime btn--sm" data-cursor="Run"><span>Lancer</span><i>⏎</i></button>
+        </div>
+        <div class="chips" id="chips">
+          <button class="chip" data-scn="support">Service client 24/7</button>
+          <button class="chip" data-scn="voice">Agent vocal pour clinique</button>
+          <button class="chip" data-scn="studio">30 visuels produit / jour</button>
+          <button class="chip" data-scn="crm">Unifier CRM & ERP</button>
+        </div>
+        <div class="log" id="agentLog" aria-live="polite">
+          <p class="log__muted">// Choisissez un scénario ou écrivez votre propre besoin.</p>
+        </div>
+      </div>
+      <div class="console__right">
+        <div class="graph" id="graph">
+          <svg id="graphSvg" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid meet"></svg>
+          <div class="graph__empty" id="graphEmpty"><span>✳</span>Architecture de la solution<br><small>générée par l’agent</small></div>
+        </div>
+        <div class="kpis" id="kpis">
+          <div class="kpi"><span class="kpi__k">Étapes</span><span class="kpi__v" id="kSteps">—</span></div>
+          <div class="kpi"><span class="kpi__k">Outils</span><span class="kpi__v" id="kTools">—</span></div>
+          <div class="kpi"><span class="kpi__k">Pilote estimé</span><span class="kpi__v" id="kTime">—</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="fineprint">Simulation illustrative d’un raisonnement d’agent. Chaque projet réel démarre par un atelier de cadrage avec vos équipes.</p>
+</section>
+
+<!-- ============ EXPERTISES ============ -->
+<section class="expertises section" id="expertises">
+  <div class="section__head">
+    <div class="section__tag"><span>03</span> EXPERTISES</div>
+    <h2 class="h2"><span class="split">DU POSSIBLE</span><span class="split">AU <em class="serif lime-ink">concret.</em></span></h2>
+    <p class="section__sub">Votre besoin est le point de départ. La bonne technologie vient ensuite.</p>
+  </div>
+  <div class="cards">
+    <article class="card" data-cursor="Explorer">
+      <div class="card__glow"></div>
+      <div class="card__top"><span class="card__num">01</span><span class="card__ico ico-agents"><i></i><i></i><i></i></span></div>
+      <h3>Agents & automatisations</h3>
+      <p>Des assistants qui comprennent vos métiers et connectent vos workflows. Ils trient, répondent, relancent, et ne dorment jamais.</p>
+      <ul class="tags"><li>LLM</li><li>RAG</li><li>n8n</li><li>APIs</li></ul>
+    </article>
+    <article class="card" data-cursor="Explorer">
+      <div class="card__glow"></div>
+      <div class="card__top"><span class="card__num">02</span><span class="card__ico ico-eco"><i></i><i></i><i></i><i></i></span></div>
+      <h3>CRM, ERP & écosystèmes</h3>
+      <p>Vos équipes, vos données et vos agents réunis dans un même environnement. Une source de vérité, enfin intelligente.</p>
+      <ul class="tags"><li>Odoo</li><li>HubSpot</li><li>Data</li><li>Sync</li></ul>
+    </article>
+    <article class="card" data-cursor="Explorer">
+      <div class="card__glow"></div>
+      <div class="card__top"><span class="card__num">03</span><span class="card__ico ico-voice"><i></i><i></i><i></i><i></i><i></i></span></div>
+      <h3>Agents vocaux</h3>
+      <p>Une nouvelle voix pour accueillir, orienter et accompagner vos clients. En français, en arabe, en darija.</p>
+      <ul class="tags"><li>Voice AI</li><li>Téléphonie</li><li>Multilingue</li></ul>
+    </article>
+    <article class="card" data-cursor="Explorer">
+      <div class="card__glow"></div>
+      <div class="card__top"><span class="card__num">04</span><span class="card__ico ico-studio"><i></i><i></i></span></div>
+      <h3>Studios sur mesure</h3>
+      <p>Votre propre espace pour créer, décliner et produire avec l’IA, connecté à votre charte et à vos process.</p>
+      <ul class="tags"><li>Génératif</li><li>Brand kit</li><li>Workflows</li></ul>
+    </article>
+    <article class="card" data-cursor="Explorer">
+      <div class="card__glow"></div>
+      <div class="card__top"><span class="card__num">05</span><span class="card__ico ico-film"><i></i></span></div>
+      <h3>Contenus & films IA</h3>
+      <p>UGC, spots publicitaires et univers de marque. De l’idée à l’écran, à une vitesse impossible il y a deux ans.</p>
+      <ul class="tags"><li>Vidéo IA</li><li>UGC</li><li>Motion</li></ul>
+    </article>
+    <article class="card" data-cursor="Explorer">
+      <div class="card__glow"></div>
+      <div class="card__top"><span class="card__num">06</span><span class="card__ico ico-learn"><i></i><i></i><i></i></span></div>
+      <h3>Formation & adoption</h3>
+      <p>Les outils évoluent chaque semaine. Donnez à vos équipes les moyens de suivre, et de prendre de l’avance.</p>
+      <ul class="tags"><li>Ateliers</li><li>Parcours</li><li>Coaching</li></ul>
+    </article>
+  </div>
+</section>
+
+<!-- ============ STUDIO ============ -->
+<section class="studio section" id="studio">
+  <div class="studio__copy">
+    <div class="section__tag"><span>04</span> AI STUDIO <b class="new">NEW</b></div>
+    <h2 class="h2"><span class="split">UNE IDÉE.</span><span class="split">TOUT UN</span><span class="split serif lime-ink">studio.</span></h2>
+    <p class="section__sub">Packaging, infographies, visuels, assistants, landing pages… Nous construisons votre espace de création, connecté à votre marque et à vos processus.</p>
+    <a href="#contact" class="btn btn--lime magnetic"><span>Imaginer mon studio</span><i>↗</i></a>
+  </div>
+  <div class="studio__app" id="studioApp">
+    <div class="app__bar"><span class="dots"><i></i><i></i><i></i></span><span>✳ YOUR BRAND / AI STUDIO</span><span class="app__gen" id="appGen">PRÊT</span></div>
+    <div class="app__tabs">
+      <button class="is-active" data-v="0">Packaging</button>
+      <button data-v="1">Infographie</button>
+      <button data-v="2">Landing page</button>
+    </div>
+    <div class="app__stage">
+      <div class="app__canvas" id="appCanvas">
+        <div class="variant is-active" data-v="0">
+          <div class="pack"><div class="pack__cap"></div><div class="pack__body"><span class="pack__brand">FORME<br>PURE.</span><span class="pack__sub">BOTANICAL SKINCARE · 50 ML</span></div></div>
+          <div class="pack pack--alt"><div class="pack__cap"></div><div class="pack__body"><span class="pack__brand">NUIT<br>CALME.</span><span class="pack__sub">NIGHT SERUM · 30 ML</span></div></div>
+        </div>
+        <div class="variant" data-v="1">
+          <div class="infog">
+            <span class="infog__t">ADOPTION IA · PME</span>
+            <div class="infog__bars"><i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:61%"></i><i style="--h:74%"></i><i style="--h:88%"></i></div>
+            <div class="infog__ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9"/><circle class="v" cx="18" cy="18" r="15.9"/></svg><b>72%</b></div>
+            <span class="infog__note">Données d’exemple</span>
+          </div>
+        </div>
+        <div class="variant" data-v="2">
+          <div class="lp">
+            <div class="lp__nav"><i></i><span></span><span></span><span></span></div>
+            <div class="lp__hero"><b>Votre offre,<br>en une phrase.</b><span class="lp__btn"></span></div>
+            <div class="lp__grid"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <div class="scanline"></div>
+      </div>
+      <aside class="app__side">
+        <span class="app__k">DIRECTION CRÉATIVE</span>
+        <p class="app__prompt" id="appPrompt">Votre marque. Vos règles. Un packaging minimal, une personnalité singulière.</p>
+        <span class="app__k">PALETTE</span>
+        <div class="swatches"><i style="--c:#d4ff3a"></i><i style="--c:#e9e4d8"></i><i style="--c:#1d2a1f"></i><i style="--c:#8fb3a3"></i></div>
+        <button class="btn btn--ghost btn--sm" id="regen" data-cursor="Générer"><span>Régénérer ✳</span></button>
+      </aside>
+    </div>
+    <p class="fineprint">Aperçu illustratif. Les outils et délais dépendent du studio conçu.</p>
+  </div>
+</section>
+
+<!-- ============ PROJECTS (horizontal) ============ -->
+<section class="projects" id="projets">
+  <div class="projects__pin">
+    <div class="projects__head">
+      <div class="section__tag"><span>05</span> SÉLECTION DE PROJETS</div>
+      <h2 class="h2"><span class="split">LE FUTUR</span><span class="split">PREND <em class="serif lime-ink">forme.</em></span></h2>
+      <div class="projects__progress"><span id="projProgress"></span></div>
+    </div>
+    <div class="projects__track" id="projTrack">
+      <article class="proj" style="--a:#7ef0ff;--b:#1a6cff" data-cursor="Voir">
+        <div class="proj__art"><span class="proj__mark">EliteSmile</span><div class="proj__orb"></div></div>
+        <div class="proj__meta"><span>01</span><h3>EliteSmile AI</h3><p>SANTÉ · ÉCOSYSTÈME IA</p><em>Par modules</em></div>
+      </article>
+      <article class="proj" style="--a:#d4ff3a;--b:#16a34a" data-cursor="Voir">
+        <div class="proj__art"><span class="proj__mark">FLOOTIA</span><div class="proj__orb"></div></div>
+        <div class="proj__meta"><span>02</span><h3>Flootia / FleetFlow</h3><p>MOBILITÉ · GESTION DE FLOTTE</p><em>MVP en développement</em></div>
+      </article>
+      <article class="proj" style="--a:#ffb03a;--b:#ff4d2e" data-cursor="Voir">
+        <div class="proj__art"><span class="proj__mark">driver4you↗</span><div class="proj__orb"></div></div>
+        <div class="proj__meta"><span>03</span><h3>Driver4You</h3><p>TRANSPORT · PARCOURS CLIENT</p><em>En développement</em></div>
+      </article>
+      <article class="proj" style="--a:#f2f2ec;--b:#d4ff3a" data-cursor="Voir">
+        <div class="proj__art"><span class="proj__mark">MAKE.<br>LEARN.</span><div class="proj__orb"></div></div>
+        <div class="proj__meta"><span>04</span><h3>MakerLab Academy</h3><p>FORMATION · APPRENTISSAGE PAR PROJET</p><em>En activité depuis 2017</em></div>
+      </article>
+      <article class="proj" style="--a:#b69bff;--b:#5b2bff" data-cursor="Voir">
+        <div class="proj__art"><span class="proj__mark">edufy.</span><div class="proj__orb"></div></div>
+        <div class="proj__meta"><span>05</span><h3>Edufy</h3><p>ÉDUCATION · SYSTÈME DE GESTION</p><em>En développement</em></div>
+      </article>
+      <article class="proj" style="--a:#ff7ad9;--b:#ffcf3a" data-cursor="Voir">
+        <div class="proj__art"><span class="proj__mark">SparkQuest ✧</span><div class="proj__orb"></div></div>
+        <div class="proj__meta"><span>06</span><h3>SparkQuest</h3><p>EDTECH · PARCOURS PÉDAGOGIQUES</p><em>En conception</em></div>
+      </article>
+      <article class="proj" style="--a:#e9e4d8;--b:#3a3a3a" data-cursor="Voir">
+        <div class="proj__art"><span class="proj__mark">ZETA®</span><div class="proj__orb"></div></div>
+        <div class="proj__meta"><span>07</span><h3>Zeta Agency</h3><p>CRÉATION · EXPÉRIENCE DE MARQUE</p><em>En évolution</em></div>
+      </article>
+      <article class="proj proj--cta">
+        <a href="#contact" class="proj__next"><span>08</span><b>Votre projet<br><em class="serif">ici.</em></b><i>↗</i></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACADEMY ============ -->
+<section class="academy section" id="academie">
+  <div class="academy__big" aria-hidden="true"><span>MAKE.</span><span>LEARN.</span><span class="lime-ink">REPEAT.</span></div>
+  <div class="academy__grid">
+    <div>
+      <div class="section__tag"><span>06</span> L’ACADÉMIE</div>
+      <h2 class="h2"><span class="split">L’IA ÉVOLUE.</span><span class="split">VOUS <em class="serif lime-ink">aussi.</em></span></h2>
+      <p class="section__sub">La technologie ne suffit pas, les compétences font la différence. Des formations pratiques, adaptées à vos équipes et à vos cas d’usage : on comprend, on expérimente, on construit.</p>
+      <p class="academy__since">MAKERLAB ACADEMY · DEPUIS 2017</p>
+    </div>
+    <div class="acc" id="acc">
+      <div class="acc__item is-open">
+        <button class="acc__h"><span>01</span>Dirigeants & responsables<i>+</i></button>
+        <div class="acc__b"><div><p>Comprendre ce que l’IA change pour votre secteur, identifier les cas d’usage à fort impact et piloter la transformation avec lucidité.</p><ul class="tags"><li>Stratégie</li><li>ROI</li><li>Gouvernance</li></ul></div></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__h"><span>02</span>Équipes métier<i>+</i></button>
+        <div class="acc__b"><div><p>Prompting avancé, assistants, automatisations du quotidien : des ateliers concrets sur vos propres tâches, pour gagner des heures dès la première semaine.</p><ul class="tags"><li>Prompting</li><li>Assistants</li><li>Productivité</li></ul></div></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__h"><span>03</span>Profils techniques<i>+</i></button>
+        <div class="acc__b"><div><p>Agents, RAG, intégrations API, évaluation et mise en production : construire des systèmes IA robustes, mesurables et maintenables.</p><ul class="tags"><li>Agents</li><li>RAG</li><li>MLOps</li></ul></div></div>
+      </div>
+      <a href="#contact" class="btn btn--ghost magnetic"><span>Construire un parcours de formation</span><i>↗</i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METHOD ============ -->
+<section class="method section" id="methode">
+  <div class="section__head">
+    <div class="section__tag"><span>07</span> NOTRE MÉTHODE</div>
+    <h2 class="h2"><span class="split">DE L’IDÉE</span><span class="split">À L’<em class="serif lime-ink">adoption.</em></span></h2>
+  </div>
+  <div class="steps">
+    <div class="steps__line"><span id="stepsLine"></span></div>
+    <div class="step"><span class="step__n">01</span><h3>On écoute.</h3><p>Vos processus, vos irritants, vos objectifs. Nous identifions ensemble les priorités.</p></div>
+    <div class="step"><span class="step__n">02</span><h3>On teste.</h3><p>Un pilote concret, un périmètre clair et des critères de réussite partagés.</p></div>
+    <div class="step"><span class="step__n">03</span><h3>On connecte.</h3><p>Intégration à vos outils, documentation et validation avec vos équipes.</p></div>
+    <div class="step"><span class="step__n">04</span><h3>On transmet.</h3><p>Formation, prise en main et accompagnement pour inscrire les usages dans la durée.</p></div>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section class="team section" id="collectif">
+  <div class="section__head">
+    <div class="section__tag"><span>08</span> LE COLLECTIF</div>
+    <h2 class="h2"><span class="split">HUMAINS.</span><span class="split serif lime-ink">avant tout.</span></h2>
+    <p class="section__sub">L’IA amplifie. Les humains décident. Six regards complémentaires pour concevoir, déployer et transmettre.</p>
+  </div>
+  <div class="members">
+    <div class="member"><span class="member__init" data-scramble-hover>YD.</span><div><h3>Younes Doudou</h3><p>Stratégie produit & architecture des solutions</p></div></div>
+    <div class="member"><span class="member__init" data-scramble-hover>AY.</span><div><h3>Asmae Yousfi</h3><p>Ingénierie logicielle & coordination de projet</p></div></div>
+    <div class="member"><span class="member__init" data-scramble-hover>SI.</span><div><h3>Salma Ibadissen</h3><p>Recherche en IA & expérimentation</p></div></div>
+    <div class="member"><span class="member__init" data-scramble-hover>A.</span><div><h3>Ayoub</h3><p>Conception 3D & prototypage technique</p></div></div>
+    <div class="member"><span class="member__init" data-scramble-hover>AD.</span><div><h3>Ahmed Doudou</h3><p>Production de contenus & supports pédagogiques</p></div></div>
+    <div class="member"><span class="member__init" data-scramble-hover>NE.</span><div><h3>Noufissa El Imbrahimi</h3><p>Finance & organisation opérationnelle</p></div></div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <canvas class="contact__gl" id="contactGl"></canvas>
+  <div class="contact__inner">
+    <p class="eyebrow"><span class="pulse"></span>LE PROCHAIN PROJET POURRAIT ÊTRE LE VÔTRE</p>
+    <h2 class="contact__title"><span class="split">ET SI ON</span><span class="split">CRÉAIT</span><span class="split serif lime-ink">la suite ?</span></h2>
+    <a class="contact__mail magnetic" href="mailto:collab@makerlab.academy" data-cursor="Écrire">collab@makerlab.academy <i>↗</i></a>
+    <p class="contact__sub">Racontez-nous votre besoin. Nous construirons le premier pas ensemble.</p>
+    <a href="mailto:collab@makerlab.academy?subject=Nouveau%20projet%20IA" class="btn btn--lime btn--xl magnetic"><span>Parlons de votre projet</span><i>↗</i></a>
+  </div>
+  <footer class="footer">
+    <span>© <span id="yearF">2026</span> Future Makers × MakerLab Academy</span>
+    <span>Casablanca, Maroc</span>
+    <a href="#top">Retour en haut ↑</a>
+  </footer>
+</section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/hero.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
